@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <style>
+        #visitedRegions {
+            width: 260px;
+        }
+
+        #birthCountry {
+            width: 137px;
+        }
+
+        #aboutU {
+            width: 260px;
+        }
+
+        #name {
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <h3>Form for CIS countries citizens.</h3>
+    <p><label for="name"><b>Full name: </b></label><br>
+        <input type="text" id="name" name="text"></p>
+
+    <p><b>Mark the right statements.</b><br>
+        <label for="legalAge">I am over 21 years old.</label>
+        <input type="checkbox" id="legalAge" name="checkbox"><br>
+        <label for="secondaryEducation">I have a secondary education.</label>
+        <input type="checkbox" id="secondaryEducation" name="checkbox"><br>
+        <label for="conditions">I don't have chronic conditions.</label>
+        <input type="checkbox" id="conditions" name="checkbox">
+    </p>
+
+    <p>
+        <label><b>Gender:</b>
+            <input type="radio" value="male" name="gender"> male
+            <input type="radio" value="female" name="gender"> female
+            <input type="radio" value="other" name="gender"> other
+        </label>
+    </p>
+
+    <p>
+        <label><b>Regions of stay for the last year: </b><br>
+            <select multiple size="3" id="visitedRegions">
+                <option>North America</option>
+                <option>Latin America & Caribbean</option>
+                <option>Asia Pacific</option>
+                <option>Oceania</option>
+                <option>EU countries</option>
+                <option>CIS countries</option>
+            </select>
+        </label>
+    </p>
+
+    <p>
+        <label><b>Country of birth: </b>
+            <select id="birthCountry">
+                <option>Armenia</option>
+                <option>Azerbaijan</option>
+                <option>Belarus</option>
+                <option>Georgia</option>
+                <option>Kazakhstan</option>
+                <option>Kyrgyzstan</option>
+                <option>Moldova</option>
+                <option>Russia</option>
+                <option>Tajikistan</option>
+                <option>Turkmenistan</option>
+                <option>Ukraine</option>
+                <option>Uzbekistan</option>
+            </select>
+        </label>
+    </p>
+
+    <p>
+        <label for="aboutU"><b>Briefly tell us about yourself.</b></label><br>
+        <textarea id="aboutU" name="textarea"></textarea>
+    </p>
+
+    <p>
+        <label for="submit"><b>Submit for review.</b></label>
+        <input type="submit" id="submit"/>
+    </p>
+
+    <a target="_blank" href="appendix.html">Appendix.</a>
+</form>
+</body>
+</html>
