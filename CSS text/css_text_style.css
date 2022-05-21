@@ -1,5 +1,5 @@
 .page {
-    background-color: antiquewhite;
+    background-color: #FEEED6;
     background-size: 100%;
     padding: 5px;
 }
@@ -8,11 +8,11 @@
     font-family: Arial, serif;
     font-weight: normal;
     font-size: small;
-    color: rgba(0, 0, 0, 0.5)
+    color: #8E9393
 }
 
 .accentuatedText {
-    color: rgb(55, 136, 171);
+    color: #378DB2;
     font-family: Calibri, sans-serif;
     font-weight: bolder;
 }
@@ -25,7 +25,7 @@
 h2 {
     font-family: Bahnschrift, serif;
     font-weight: normal;
-    color: rgba(0, 0, 0, 0.6);
+    color: #676565;
     margin: 5px;
 }
 
