@@ -1,34 +1,41 @@
-.page {
+.all_elements {
     background-color: #FEEED6;
-    background-size: 100%;
-    padding: 5px;
+    padding: 5px 10px 0;
+    box-sizing: border-box;
+}
+
+.main_header {
+    padding-bottom: 3px;
+    font: 28px Arial;
+    color: #6A6867;
+}
+
+.small_header {
+    padding-top: 10px;
+
+    font: 15px Arial;
+    font-weight: normal;
+    color: #6A6867;
+
+}
+
+.accentuated_text {
+    font: 15px Arial;
+    font-weight: bolder;
+    color: #378DB2;
+
 }
 
 .content {
-    font-family: Arial, serif;
+    padding-top: 7px;
+    padding-bottom: 3px;
+    text-align: justify;
+    text-indent: 19px;
+    font: 15px Arial;
     font-weight: normal;
-    font-size: small;
-    color: #8E9393
+    color: #6A6867;
 }
 
-.accentuatedText {
-    color: #378DB2;
-    font-family: Calibri, sans-serif;
-    font-weight: bolder;
-}
-
-.contentParagraph {
-    text-indent: 1.5em;
-    margin-bottom: 8px;
-}
-
-h2 {
-    font-family: Bahnschrift, serif;
-    font-weight: normal;
-    color: #676565;
-    margin: 5px;
-}
-
-p {
-    margin: 5px;
+p.accentuated_text {
+    padding-top: 15px;
 }
