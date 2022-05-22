@@ -1,24 +1,29 @@
-.grayRow {
-    background-color: #EEEEEE;
-}
-
-
-.whiteRow{
-    background-color: white;
-}
-
-table {
+.table {
+    font: 18px Arial;
+    box-sizing: border-box;
     border-spacing: 1px;
-    background-color: #E0E0E0;
-    color: #4B6264;
+    background-color: #CDCDCD;
+    width: 857px;
+}
+
+th {
+    padding: 16px 53px 11px 14px;
 }
 
 td {
-    padding: 8px 50px 8px 5px;
-    font-family: sans-serif;
-    font-size: smaller;
+    padding: 17px 53px 12px 15px;
 }
-.blueRow {
+
+.white_row {
+    background-color: white;
+}
+
+.gray_row {
+    background-color: #EEEEEE;
+}
+
+.head {
+    color: white;
+    text-align: left;
     background-color: #3498DB;
-    color: white ;
 }
