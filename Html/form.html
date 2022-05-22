@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <title>Form</title>
     <style>
-        #visitedRegions {
+        #visited_regions {
             width: 260px;
         }
 
-        #birthCountry {
+        #birth_country {
             width: 137px;
         }
 
-        #aboutU {
+        #about_u {
             width: 260px;
         }
 
@@ -28,25 +28,36 @@
         <input type="text" id="name" name="text"></p>
 
     <p><b>Mark the right statements.</b><br>
-        <label for="legalAge">I am over 21 years old.</label>
-        <input type="checkbox" id="legalAge" name="checkbox"><br>
-        <label for="secondaryEducation">I have a secondary education.</label>
-        <input type="checkbox" id="secondaryEducation" name="checkbox"><br>
-        <label for="conditions">I don't have chronic conditions.</label>
-        <input type="checkbox" id="conditions" name="checkbox">
+        <label>
+            <input type="checkbox" id="legalAge" name="checkbox">
+            I am over 21 years old.<br>
+        </label>
+        <label>
+            <input type="checkbox" id="secondaryEducation" name="checkbox">
+            I have a secondary education.<br>
+        </label>
+        <label>
+            <input type="checkbox" id="conditions" name="checkbox">
+            I don't have chronic conditions.
+        </label>
     </p>
 
     <p>
-        <label><b>Gender:</b>
+        <b>Gender:</b>
+        <label>
             <input type="radio" value="male" name="gender"> male
+        </label>
+        <label>
             <input type="radio" value="female" name="gender"> female
+        </label>
+        <label>
             <input type="radio" value="other" name="gender"> other
         </label>
     </p>
 
     <p>
         <label><b>Regions of stay for the last year: </b><br>
-            <select multiple size="3" id="visitedRegions">
+            <select multiple size="3" id="visited_regions">
                 <option>North America</option>
                 <option>Latin America & Caribbean</option>
                 <option>Asia Pacific</option>
@@ -59,7 +70,7 @@
 
     <p>
         <label><b>Country of birth: </b>
-            <select id="birthCountry">
+            <select id="birth_country">
                 <option>Armenia</option>
                 <option>Azerbaijan</option>
                 <option>Belarus</option>
@@ -77,8 +88,8 @@
     </p>
 
     <p>
-        <label for="aboutU"><b>Briefly tell us about yourself.</b></label><br>
-        <textarea id="aboutU" name="textarea"></textarea>
+        <label for="about_u"><b>Briefly tell us about yourself.</b></label><br>
+        <textarea id="about_u" name="textarea"></textarea>
     </p>
 
     <p>
