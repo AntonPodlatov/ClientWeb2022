@@ -5,6 +5,10 @@
     height: 100%;
 }
 
+.table_container {
+    max-width: 857px;
+}
+
 .table th {
     border: 1px solid #CCC;
     background-color: #3498DB;
