@@ -1,41 +1,30 @@
 .all_elements {
+    color: #6A6867;
     background-color: #FEEED6;
     padding: 5px 10px 0;
-    box-sizing: border-box;
+    max-width: 741px;
+    font: 15px Arial;
 }
 
 .main_header {
     padding-bottom: 3px;
     font: 28px Arial;
-    color: #6A6867;
 }
 
 .small_header {
     padding-top: 10px;
-
-    font: 15px Arial;
     font-weight: normal;
-    color: #6A6867;
-
 }
 
 .accentuated_text {
-    font: 15px Arial;
-    font-weight: bolder;
+    font-weight: bold;
     color: #378DB2;
-
 }
 
 .content {
+    text-indent: 1em;
     padding-top: 7px;
     padding-bottom: 3px;
     text-align: justify;
-    text-indent: 19px;
-    font: 15px Arial;
-    font-weight: normal;
-    color: #6A6867;
-}
-
-p.accentuated_text {
-    padding-top: 15px;
+    line-height: 1.4;
 }
