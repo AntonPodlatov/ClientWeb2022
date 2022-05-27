@@ -27,7 +27,6 @@ function getRemoveButton(item) {
     var removeButton = document.createElement("input")
     removeButton.setAttribute("type", "button");
     removeButton.setAttribute("value", "remove item");
-    removeButton.setAttribute("class", "remove_button")
 
     removeButton.addEventListener("click", function () {
         item.parentNode.removeChild(item);
@@ -40,7 +39,6 @@ function getEditButton(itemTextNode) {
     var editButton = document.createElement("input");
     editButton.setAttribute("type", "button");
     editButton.setAttribute("value", "edit");
-    editButton.setAttribute("class", "edit_button");
 
     var editField = document.createElement("input");
     editField.setAttribute("type", "text");
@@ -60,7 +58,6 @@ function getSaveButton(editField){
     var saveButton = document.createElement("input");
     saveButton.setAttribute("type", "button");
     saveButton.setAttribute("value", "save");
-    saveButton.setAttribute("class", "save_button");
     saveButton.addEventListener("click", function () {
 
         var newTextNode = document.createTextNode(editField.value);
