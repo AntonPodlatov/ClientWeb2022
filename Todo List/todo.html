@@ -7,11 +7,13 @@
         li {
             line-height: 1.5;
         }
-
-        .item {
+        .item{
             display: flex;
             width: 500px;
-            justify-content: space-between;
+        }
+        .item :nth-last-child(-n+2) {
+            color: #378DB2;
+            :nth-last-child(-n+2);
         }
     </style>
 </head>
@@ -27,7 +29,6 @@
 <h4>List</h4>
 <hr>
 <ul id="list">
-
 </ul>
 <hr>
 <script src="todo.js"></script>
