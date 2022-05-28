@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List jQuery</title>
+    <script src="jquery-3.6.0.js"></script>
+    <script src="todo_jquery.js"></script>
+    <style>
+        li {
+            line-height: 1.5;
+        }
+
+        .item {
+            display: flex;
+            width: 500px;
+        }
+
+        .item :nth-last-child(-n+2) {
+            color: #378DB2;: nth-last-child(- n + 2);
+        }
+    </style>
+</head>
+<body>
+<p>
+    <label> Input something:
+        <input type="text" id="text-field">
+    </label>
+</p>
+<p>
+    <input type="button" id="add_button" value="add to list">
+</p>
+<h4>List</h4>
+<hr>
+<ul id="list">
+
+</ul>
+<hr>
+</body>
+</html>
