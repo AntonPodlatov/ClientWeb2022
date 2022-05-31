@@ -1,34 +1,35 @@
 document.addEventListener("DOMContentLoaded", function () {
-
     var button = document.getElementById("button");
 
     button.addEventListener("click", function () {
-        var textFieldContent = document.getElementById("text-field").value;
+        var textField = document.getElementById("text-field");
 
-        if (textFieldContent !== "") {
-            var list = document.getElementById("list");
-            var item = document.createElement("li");
-            item.setAttribute("class", "item")
-
-            var itemTextNode = document.createTextNode(textFieldContent);
-            var removeButton = getRemoveButton(item);
-            var editButton = getEditButton(itemTextNode);
-
-            item.appendChild(itemTextNode);
-            item.appendChild(editButton);
-            item.appendChild(removeButton);
-            list.appendChild(item);
-
-            document.getElementById("text-field").value = "";
-        } else {
+        if (textField.value === "") {
             alert("Input something.");
+            return;
         }
+
+        var list = document.getElementById("list");
+        var item = document.createElement("li");
+        item.className = "item";
+
+        var itemTextNode = document.createTextNode(textField.value);
+        item.appendChild(itemTextNode);
+
+        var removeButton = createRemoveButton(item);
+        var editButton = createEditButton(itemTextNode);
+
+        item.appendChild(editButton);
+        item.appendChild(removeButton);
+        list.appendChild(item);
+
+        textField.value = "";
     });
 
-    function getRemoveButton(item) {
+    function createRemoveButton(item) {
         var removeButton = document.createElement("input")
-        removeButton.setAttribute("type", "button");
-        removeButton.setAttribute("value", "remove item");
+        removeButton.type = "button";
+        removeButton.value = "remove item";
 
         removeButton.addEventListener("click", function () {
             item.parentNode.removeChild(item);
@@ -37,37 +38,60 @@ document.addEventListener("DOMContentLoaded", function () {
         return removeButton;
     }
 
-    function getEditButton(itemTextNode) {
+    function createEditButton(itemTextNode) {
+        var item = itemTextNode.parentNode;
+
         var editButton = document.createElement("input");
-        editButton.setAttribute("type", "button");
-        editButton.setAttribute("value", "edit");
+        editButton.type = "button";
+        editButton.value = "edit";
 
         var editField = document.createElement("input");
-        editField.setAttribute("type", "text");
-        editField.setAttribute("value", itemTextNode.textContent);
+        editField.type = "text";
+        editField.value = itemTextNode.textContent;
 
         editButton.addEventListener("click", function () {
+            var textContent = itemTextNode.textContent;
             itemTextNode.replaceWith(editField);
 
-            var saveButton = getSaveButton(editField);
+            var saveButton = createSaveButton(editField);
             editButton.replaceWith(saveButton);
+
+            var cancelButton = createCancelButton(textContent, editField, saveButton);
+            item.insertBefore(cancelButton, saveButton);
         });
 
         return editButton;
     }
 
-    function getSaveButton(editField) {
+    function createSaveButton(editField) {
         var saveButton = document.createElement("input");
-        saveButton.setAttribute("type", "button");
-        saveButton.setAttribute("value", "save");
-        saveButton.addEventListener("click", function () {
+        saveButton.type = "button";
+        saveButton.value = "save";
 
+        saveButton.addEventListener("click", function () {
             var newTextNode = document.createTextNode(editField.value);
             editField.replaceWith(newTextNode);
 
-            saveButton.replaceWith(getEditButton(newTextNode))
+            saveButton.replaceWith(createEditButton(newTextNode));
+            newTextNode.parentNode.removeChild(newTextNode.parentNode.children.item(0));
         });
 
         return saveButton;
+    }
+
+    function createCancelButton(textContent, editField, saveButton) {
+        var cancelButton = document.createElement("input");
+        cancelButton.type = "button";
+        cancelButton.value = "cancel";
+
+        cancelButton.addEventListener("click", function () {
+            var newTextNode = document.createTextNode(textContent);
+
+            editField.replaceWith(newTextNode);
+            saveButton.replaceWith(createEditButton(newTextNode));
+            cancelButton.parentNode.removeChild(cancelButton);
+        });
+
+        return cancelButton;
     }
 });

@@ -1,0 +1,12 @@
+li {
+    line-height: 1.5;
+}
+
+.item {
+    display: flex;
+    width: 500px;
+}
+
+.item :nth-last-child(-n+3) {
+    color: #378DB2;
+}
