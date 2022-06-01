@@ -6,20 +6,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (inputArea.value === "") {
             alert("Введите значение.");
-        } else {
-            var celsiusTemperature = Number(inputArea.value);
-            inputArea.value = "";
-
-            if (isNaN(celsiusTemperature)) {
-                alert("Введено не число.");
-                return;
-            }
-
-            var fahrenheitTemperature = celsiusTemperature * 9 / 5 + 32;
-            var kelvinTemperature = celsiusTemperature + 273.15;
-
-            appendTableRowWithValues(celsiusTemperature, fahrenheitTemperature, kelvinTemperature);
+            return;
         }
+
+        var celsiusTemperature = Number(inputArea.value);
+        inputArea.value = "";
+
+        if (isNaN(celsiusTemperature)) {
+            alert("Введено не число.");
+            return;
+        }
+
+        var fahrenheitTemperature = celsiusTemperature * 9 / 5 + 32;
+        var kelvinTemperature = celsiusTemperature + 273.15;
+
+        appendTableRowWithValues(celsiusTemperature, fahrenheitTemperature, kelvinTemperature);
+
     });
 
     function appendTableRowWithValues(celsiusTemperature, fahrenheitTemperature, kelvinTemperature) {

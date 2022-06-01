@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Form</title>
+    <link rel="stylesheet" href="css_reset.css">
+    <style>
+        .all_elements {
+            box-sizing: border-box;
+            color: #737373;
+            background-color: #FEEED6;
+            padding: 9px 19px 14px;
+            max-width: 737px;
+            height: 465px;
+            font: 14px Arial;
+        }
+
+        .label {
+            font-weight: bolder;
+            color: #676565;
+            margin-bottom: 5em;
+        }
+
+        .input {
+            color: #999;
+            border: none;
+            height: 32px;
+            width: 100%;
+            padding-left: 13px;
+        }
+
+        .form_element {
+            margin-bottom: 21px;
+            line-height: 21px;
+        }
+
+        .submit {
+            display: flex;
+            justify-content: right;
+        }
+
+        .submit input {
+            border: none;
+            background-color: #378DB2;
+            color: #FFF;
+            font-weight: bold;
+            width: 149px;
+            height: 32px;
+            font-size: 14px;
+        }
+
+        #big_field {
+            height: 112px;
+        }
+    </style>
+</head>
+<body>
+<div class="all_elements">
+    <form>
+        <p class="form_element">
+            <label class="label">
+                Ваше имя
+                <input type="text" placeholder="Ваше имя *" class="input">
+            </label>
+        </p>
+
+        <p class="form_element">
+            <label class="label">
+                Ваш номер телефона
+                <input type="text" placeholder="Ваш номер телефона *" class="input">
+            </label>
+        </p>
+
+        <p class="form_element">
+            <label class="label">
+                Ваш email или VK
+                <input type="text" placeholder="Ваше email или VK *" class="input">
+            </label>
+        </p>
+
+        <p class="form_element">
+            <label class="label">
+                Комментарий
+                <input type="text" placeholder="Комментарий *" class="input" id="big_field">
+            </label>
+        </p>
+        <p>Заполните и отправьте форму, и мы перезвоним Вам по указанному номеру</p>
+        <p class="submit"><input type="submit" value="Отправить заявку"></p>
+    </form>
+</div>
+</body>
+</html>
