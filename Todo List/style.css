@@ -1,12 +1,16 @@
 li {
-    line-height: 1.5;
+    margin-bottom: 5px;
 }
 
 .item {
     display: flex;
-    width: 500px;
+    width: 450px;
+    justify-content: flex-end;
 }
-
-.item :nth-last-child(-n+3) {
+.item :first-of-type{
+    margin-left: auto;
+}
+.item :nth-last-child(-n+4) {
     color: #378DB2;
+    margin-right: 8px;
 }
