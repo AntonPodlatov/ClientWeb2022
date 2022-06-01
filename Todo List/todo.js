@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function createRemoveButton(listItem) {
-        var removeButton = document.createElement("input")
+        var removeButton = document.createElement("input");
         removeButton.type = "button";
         removeButton.value = "remove item";
 
