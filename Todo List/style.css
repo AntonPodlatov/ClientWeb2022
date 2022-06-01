@@ -7,9 +7,11 @@ li {
     width: 450px;
     justify-content: flex-end;
 }
-.item :first-of-type{
+
+.item :first-of-type {
     margin-left: auto;
 }
+
 .item :nth-last-child(-n+4) {
     color: #378DB2;
     margin-right: 8px;
