@@ -1,0 +1,61 @@
+.all_elements {
+    box-sizing: border-box;
+    color: #737373;
+    background-color: #FEEED6;
+    padding: 10px 33px 14px 17px;
+    max-width: 737px;
+    height: 465px;
+    font: 14px Arial;
+}
+
+.label {
+    font-weight: bolder;
+    color: #676565;
+    padding-bottom: 120px;
+}
+
+.input {
+    color: #999;
+    border: none;
+    height: 32px;
+    width: 100%;
+    padding-left: 13px;
+}
+
+.form_element {
+    margin-bottom: 11px;
+    line-height: 29px;
+}
+
+.text {
+    line-height: 6px;
+    margin-bottom: 17px;
+}
+
+.submit {
+    display: flex;
+    justify-content: right;
+}
+
+.submit input {
+    border: none;
+    background-color: #378DB2;
+    color: #FFF;
+    font-weight: bold;
+    width: 149px;
+    height: 32px;
+    font-size: 14px;
+}
+
+#big_field {
+    height: 110px;
+    font: 14px Arial;
+}
+
+#big_field::placeholder {
+    transform: translateY(50%);
+}
+
+:focus::-webkit-input-placeholder {
+    color: transparent
+}
