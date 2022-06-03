@@ -2,11 +2,12 @@
     font: 18px Arial;
     box-sizing: border-box;
     width: 100%;
-    height: 100%;
+
 }
 
 .table_container {
-    max-width: 857px;
+    max-width: 749px;
+    box-sizing: border-box;
 }
 
 .table th {
@@ -15,13 +16,15 @@
     color: #FFF;
     text-align: left;
     vertical-align: middle;
-    padding: 9px 0 9px 8px;
     font-weight: bold;
+    height: 26px;
+    padding: 9px 0 9px 8px;
 }
 
 .table td {
     border: 1px solid #CCC;
-    padding: 9px 10px 9px;
+    height: 26px;
+    padding: 9px 0 9px 8px;
 }
 
 .table tr:nth-child(odd) {
