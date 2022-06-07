@@ -30,18 +30,26 @@
     }
 
     function getMaxCitiesCount(array) {
-        var maxCitiesCount = 0;
-
-        array.forEach(function (currentCountry) {
-            var currentCountryCitiesCount = currentCountry.cities.length;
-
-            if (maxCitiesCount < currentCountryCitiesCount) {
-                maxCitiesCount = currentCountryCitiesCount;
-            }
-        });
-
-        return maxCitiesCount;
+        return array.reduce(function (maxCount, currentCountry) {
+            return Math.max(maxCount, currentCountry.cities.length);
+        }, 0);
     }
+
+    /*
+        function getMaxCitiesCount(array) {
+            var maxCitiesCount = 0;
+
+            array.forEach(function (currentCountry) {
+                var currentCountryCitiesCount = currentCountry.cities.length;
+
+                if (maxCitiesCount < currentCountryCitiesCount) {
+                    maxCitiesCount = currentCountryCitiesCount;
+                }
+            });
+
+            return maxCitiesCount;
+        }
+    */
 
     function getCountriesWithMaxCitiesCount(countries) {
         var maxCitiesCount = getMaxCitiesCount(countries)
