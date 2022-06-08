@@ -1,0 +1,15 @@
+.table {
+    counter-reset: rowCounter 0;
+}
+
+.table td:nth-child(1)::before {
+    counter-increment: rowCounter 1;
+    content: counter(rowCounter);
+    text-align: center;
+    margin: 5px 10px;
+}
+
+.table tr:last-child td:nth-child(1)::before {
+    content: "";
+    margin: 5px 14px;
+}
