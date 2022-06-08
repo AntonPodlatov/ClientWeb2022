@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>CSS Form</title>
@@ -7,35 +7,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="all_elements">
-    <form>
-        <p class="form_element">
-            <label class="label">
-                Ваше имя
-                <input type="text" placeholder="Ваше имя *" class="input">
-            </label>
-        </p>
-        <p class="form_element">
-            <label class="label">
-                Ваш номер телефона
-                <input type="text" placeholder="Ваш номер телефона *" class="input">
-            </label>
-        </p>
-        <p class="form_element">
-            <label class="label">
-                Ваш email или VK
-                <input type="text" placeholder="Ваш email или VK *" class="input">
-            </label>
-        </p>
-        <p class="form_element">
-            <label class="label">
-                Комментарий
-                <textarea class="input" id="big_field" placeholder="Комментарий (не обязательно)" ></textarea>
-            </label>
-        </p>
+<h1 class="main_header">Отправить заявку</h1>
+<form>
+    <div class="form_content">
+        <label class="label">Ваше имя<br>
+            <input class="input" type="text" placeholder="Ваше имя *">
+        </label><br>
+        <label class="label">Ваш номер телефона<br>
+            <input class="input" type="text" placeholder="Ваш номер телефона *">
+        </label><br>
+        <label class="label">Ваш email или VK<br>
+            <input class="input" type="text" placeholder="Ваш email или VK *">
+        </label><br>
+        <label class="label">Комментарий<br>
+            <textarea class="big_field" placeholder="Комментарий (не обязательно)"></textarea>
+        </label><br>
         <p class="text">Заполните и отправьте форму, и мы перезвоним Вам по указанному номеру</p>
-        <p class="submit"><input type="submit" value="Отправить заявку"></p>
-    </form>
-</div>
+        <p><input class="submit" type="submit" value="Отправить заявку"></p>
+    </div>
+</form>
 </body>
 </html>
