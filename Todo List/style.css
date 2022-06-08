@@ -1,11 +1,16 @@
-li {
-    margin-bottom: 5px;
+.container {
+    margin: 20px;
+}
+
+p {
+    margin-bottom: 15px;
 }
 
 .item {
     display: flex;
     width: 450px;
     justify-content: flex-end;
+    margin-bottom: 10px;
 }
 
 .item :first-of-type {
@@ -16,3 +21,4 @@ li {
     color: #378DB2;
     margin-right: 8px;
 }
+

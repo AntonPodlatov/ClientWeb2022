@@ -70,11 +70,16 @@ document.addEventListener("DOMContentLoaded", function () {
         saveButton.value = "save";
 
         saveButton.addEventListener("click", function () {
+            if (editField.value === "") {
+                editField.placeholder = "An empty entry is prohibited.";
+                return;
+            }
+
             var newTextNode = document.createTextNode(editField.value);
             editField.replaceWith(newTextNode);
 
             saveButton.replaceWith(createEditButton(newTextNode));
-            newTextNode.parentNode.removeChild(newTextNode.parentNode.children.item(0));
+            newTextNode.parentNode.removeChild(newTextNode.parentNode.children[0]);
         });
 
         return saveButton;
@@ -88,8 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
         cancelButton.addEventListener("click", function () {
             var newTextNode = document.createTextNode(textContent);
 
-            listItem.children.item(0).replaceWith(newTextNode);
-            listItem.children.item(1).replaceWith(createEditButton(newTextNode));
+            listItem.children[0].replaceWith(newTextNode);
+            listItem.children[1].replaceWith(createEditButton(newTextNode));
             cancelButton.parentNode.removeChild(cancelButton);
         });
 
