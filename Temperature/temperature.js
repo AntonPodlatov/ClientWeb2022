@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
         var kelvinTemperature = celsiusTemperature + 273.15;
 
         appendTableRowWithValues(celsiusTemperature, fahrenheitTemperature, kelvinTemperature);
-
     });
 
     function appendTableRowWithValues(celsiusTemperature, fahrenheitTemperature, kelvinTemperature) {
