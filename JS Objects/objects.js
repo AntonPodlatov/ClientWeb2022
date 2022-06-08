@@ -38,7 +38,6 @@
     /*
         function getMaxCitiesCount(array) {
             var maxCitiesCount = 0;
-
             array.forEach(function (currentCountry) {
                 var currentCountryCitiesCount = currentCountry.cities.length;
 
