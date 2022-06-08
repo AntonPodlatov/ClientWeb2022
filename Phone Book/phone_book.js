@@ -27,7 +27,7 @@ $(document).ready(function () {
     });
 
     $("#checkAll").on("change", function () {
-        $(".tbody_checkbox").trigger("click");
+        $(".tbody_checkbox").not(this).prop('checked', this.checked);
     });
 
     function appendRow() {
