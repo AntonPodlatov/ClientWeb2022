@@ -1,12 +1,11 @@
 .table {
-    font: 18px Arial;
+    font: 19px Arial;
     box-sizing: border-box;
     width: 100%;
-
 }
 
 .table_container {
-    max-width: 749px;
+    max-width: 751px;
     box-sizing: border-box;
 }
 
@@ -15,18 +14,28 @@
     background-color: #3498DB;
     color: #FFF;
     text-align: left;
-    vertical-align: middle;
+    padding: 12px 10px 10px;
     font-weight: bold;
-    height: 26px;
-    padding: 9px 0 9px 8px;
 }
 
 .table td {
+    vertical-align: middle;
     border: 1px solid #CCC;
-    height: 26px;
-    padding: 9px 0 9px 8px;
+    padding: 13px 10px 9.3px;
 }
 
 .table tr:nth-child(odd) {
     background-color: #EEE;
+}
+
+.col-1 {
+    width: 20.4%;
+}
+
+.col-2 {
+    width: 20.15%;
+}
+
+.col-3 {
+    width: 36.1%;
 }
