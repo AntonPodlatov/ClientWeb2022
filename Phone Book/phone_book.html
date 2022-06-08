@@ -18,16 +18,16 @@
     <form id="form" class="row g-3 needs-validation" novalidate>
         <div class="col-4">
             <label for="surname" class="form-label">Фамилия</label>
-            <input type="text" class="form-control" id="surname" required>
+            <input type="text" class="form-control" id="surname" required pattern="[а-яА-ЯёЁa-zA-Z- ]*">
             <div class="invalid-feedback">
-                Укажите фамилию, используйте только буквы и дефис
+                Укажите фамилию, используйте только буквы и дефис.
             </div>
         </div>
         <div class="col-4">
             <label for="name" class="form-label">Имя</label>
-            <input type="text" class="form-control" id="name" required>
+            <input type="text" class="form-control" id="name" required pattern="[а-яА-ЯёЁa-zA-Z- ]*">
             <div class="invalid-feedback">
-                Укажите имя, используйте только буквы и дефис
+                Укажите имя, используйте только буквы и дефис.
             </div>
         </div>
         <div class="col-4">

@@ -4,8 +4,8 @@ $(document).ready(function () {
     var surnameField = $("#surname");
 
     phoneField.inputmask({regex: phoneField[0].pattern});
-    nameField.inputmask({regex: "[а-яА-ЯёЁa-zA-Z- ]*"});
-    surnameField.inputmask({regex: "[а-яА-ЯёЁa-zA-Z- ]*"});
+    //   nameField.inputmask({regex: "[а-яА-ЯёЁa-zA-Z- ]*"});
+    //   surnameField.inputmask({regex: "[а-яА-ЯёЁa-zA-Z- ]*"});
 
     $("#button").on("click", function () {
         var form = document.querySelector(".needs-validation");
@@ -27,7 +27,7 @@ $(document).ready(function () {
     });
 
     $("#checkAll").on("change", function () {
-        $(".tbody_checkbox").not(this).prop('checked', this.checked);
+        $(".tbody_checkbox").not(this).prop("checked", this.checked);
     });
 
     function appendRow() {
