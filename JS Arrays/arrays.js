@@ -46,6 +46,7 @@
     }
 
     console.log("Массив: " + getArray());
+
     console.log("Массив отсортирован: " + sortArray(getArray()));
     console.log("Первые 5 элементов массива: " + getFirst5(sortArray(getArray())));
     console.log("Последние 5 элементов массива: " + getLast5(sortArray(getArray())));
