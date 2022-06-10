@@ -53,7 +53,7 @@ $(document).ready(function () {
 
     function appendRow() {
         var newRow = $(
-            "<tr class='table_row'><td></td><td>" + surnameField.val() +
+            "<tr class='tbody_row'><td></td><td>" + surnameField.val() +
             "</td><td>" + nameField.val() +
             "</td><td class='phone_table_detail'>+7-" + phoneField.val() +
             "</td><td></td><td><input type='checkbox' class='form-check-input tbody_checkbox'></td><tr>"
@@ -115,7 +115,7 @@ $(document).ready(function () {
         var checkedRows = $(":checked");
 
         return $.map(checkedRows, function (one) {
-            return one.closest(".table_row");
+            return one.closest(".tbody_row");
         });
     }
 });
