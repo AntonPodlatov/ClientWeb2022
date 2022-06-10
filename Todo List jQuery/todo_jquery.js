@@ -9,7 +9,7 @@ $(document).ready(function () {
         }
 
         var list = $(".list-group");
-        var item = $("<li class='list-group-item d-flex flex-wrap text-break'></li>");
+        var item = $("<li class='list-group-item d-flex flex-wrap text-break align-items-center'></li>");
         item.text(textField.val());
         var editButton = getEditButton(item);
         var removeButton = getRemoveButton(item);
