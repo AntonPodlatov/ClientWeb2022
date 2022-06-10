@@ -52,6 +52,11 @@ $(document).ready(function () {
         var saveButton = $("<input type='button' class='me-1' value='save'>");
 
         saveButton.on("click", function () {
+            if (editField.val() === "") {
+                editField[0].placeholder = "An empty entry is prohibited.";
+                return;
+            }
+
             editField.replaceWith(editField.val());
             item.children().eq(0).remove();
             saveButton.replaceWith(getEditButton(item));
