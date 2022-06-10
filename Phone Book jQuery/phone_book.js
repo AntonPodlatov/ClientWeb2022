@@ -3,9 +3,30 @@ $(document).ready(function () {
     var nameField = $("#name");
     var surnameField = $("#surname");
 
-    phoneField.inputmask({regex: phoneField[0].pattern});
-    //   nameField.inputmask({regex: "[а-яА-ЯёЁa-zA-Z- ]*"});
-    //   surnameField.inputmask({regex: "[а-яА-ЯёЁa-zA-Z- ]*"});
+    var phoneRegexString = "\\d{3}-\\d{3}-\\d{4}";
+    var nameRegexString = "^[а-яА-ЯёЁa-zA-Z- ]*$";
+    var nameRegex = /^[а-яА-ЯёЁa-zA-Z- ]*$/;
+
+    surnameField.prop("pattern", nameRegexString);
+    nameField.prop("pattern", nameRegexString);
+    phoneField.prop("pattern", phoneRegexString);
+    phoneField.inputmask({regex: phoneRegexString});
+
+    surnameField.on("input", function () {
+        if (!nameRegex.test(surnameField.val())) {
+            surnameField.addClass("is-invalid");
+        } else {
+            surnameField.removeClass("is-invalid");
+        }
+    });
+
+    nameField.on("input", function () {
+        if (!nameRegex.test(nameField.val())) {
+            nameField.addClass("is-invalid");
+        } else {
+            nameField.removeClass("is-invalid");
+        }
+    });
 
     $("#button").on("click", function () {
         var form = document.querySelector(".needs-validation");
