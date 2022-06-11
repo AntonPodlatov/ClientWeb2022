@@ -9,7 +9,7 @@ $(document).ready(function () {
         }
 
         var list = $(".list-group");
-        var item = $("<li class='list-group-item d-flex flex-wrap text-break align-items-center'></li>");
+        var item = $("<li class='list-group-item d-flex text-break align-items-center'></li>");
         item.text(textField.val());
         var editButton = getEditButton(item);
         var removeButton = getRemoveButton(item);
@@ -22,15 +22,15 @@ $(document).ready(function () {
     });
 
     function getRemoveButton(item) {
-        return $("<input type='button' value='remove item'>")
+        return $("<input type='button' value='Remove item' class='btn btn-outline-secondary'>")
             .on("click", function () {
                 item.remove();
             });
     }
 
     function getEditButton(item) {
-        var editButton = $("<input type='button' class='ms-auto me-1' value='edit'>");
-        var editField = $("<input type='text' class='flex-grow-1' value='" + item.text() + "'>");
+        var editButton = $("<input type='button' class='btn btn-outline-secondary ms-auto me-1' value='Edit'>");
+        var editField = $("<input type='text' class='form-control ' value='" + item.text() + "'>");
         var savedText = item.text();
 
         editButton.on("click", function () {
@@ -49,7 +49,7 @@ $(document).ready(function () {
     }
 
     function getSaveButton(editField, item) {
-        var saveButton = $("<input type='button' class='me-1' value='save'>");
+        var saveButton = $("<input type='button' class='btn btn-outline-secondary me-1' value='Save'>");
 
         saveButton.on("click", function () {
             if (editField.val() === "") {
@@ -66,7 +66,7 @@ $(document).ready(function () {
     }
 
     function getCancelButton(item, savedText) {
-        var cancelButton = $("<input type='button' class='ms-1 me-1' value='cancel'>");
+        var cancelButton = $("<input type='button' class='ms-1 me-1 btn btn-outline-secondary' value='Cancel'>");
 
         cancelButton.on("click", function () {
             item.children().eq(0).replaceWith(savedText);
