@@ -37,7 +37,7 @@
 
             <input v-if="item.isEditing" v-model="item.editingText"
                    @keyup="item.isEditTextInvalid=false" @keyup.enter="saveItem(item)"
-                   type="text" class="form-control" placeholder="An empty entry is prohibited."
+                   type="text" class="form-control" placeholder="An empty entry is prohibited"
                    :class={"is-invalid":item.isEditTextInvalid}>
 
             <input v-if="item.isEditing" @click="cancelEditing(item)"
