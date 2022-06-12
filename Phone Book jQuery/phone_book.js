@@ -53,10 +53,10 @@ $(document).ready(function () {
 
     function appendRow() {
         var newRow = $(
-            "<tr class='tbody_row'><td></td><td>" + surnameField.val() +
+            "<tr class='tbody_row align-middle text-center'><td></td><td>" + surnameField.val() +
             "</td><td>" + nameField.val() +
             "</td><td class='phone_table_detail'>+7-" + phoneField.val() +
-            "</td><td></td><td><input type='checkbox' class='form-check-input tbody_checkbox'></td><tr>"
+            "</td><td></td><td class='text-start'><input type='checkbox' class='form-check-input tbody_checkbox'></td><tr>"
         );
 
         var button = createRemoveRowButton(newRow);
@@ -67,7 +67,7 @@ $(document).ready(function () {
     }
 
     function createRemoveRowButton(row) {
-        return $("<input type='button' value='Удалить запись' data-bs-toggle='modal' data-bs-target='#removeConfirmation'>")
+        return $("<input type='button' value='Удалить запись' class='btn btn-outline-secondary' data-bs-toggle='modal' data-bs-target='#removeConfirmation'>")
             .on("click", function () {
                 var content = $("#modal-content");
                 var checkedRows = getCheckedRows();
@@ -91,9 +91,9 @@ $(document).ready(function () {
                     var name = row.children().get(2).innerHTML;
                     var phone = row.children().get(3).innerHTML;
 
-                    $("<p>" + "Фамилия: " + surname + "</p>").appendTo(content);
-                    $("<p>" + "Имя: " + name + "</p>").appendTo(content);
-                    $("<p>" + "Номер телефона: " + phone + "</p>").appendTo(content);
+                    $("<p><b>" + "Фамилия:</b> " + surname + "</p>").appendTo(content);
+                    $("<p><b>" + "Имя:</b> " + name + "</p>").appendTo(content);
+                    $("<p><b>" + "Номер телефона:</b> " + phone + "</p>").appendTo(content);
 
                     $("#confirmedRemoveButton").on("click", function () {
                         row.remove();

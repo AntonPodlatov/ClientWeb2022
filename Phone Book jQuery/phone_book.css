@@ -1,3 +1,7 @@
+.container {
+    max-width: 900px;
+}
+
 .table {
     counter-reset: rowCounter 0;
 }

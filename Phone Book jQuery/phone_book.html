@@ -14,46 +14,46 @@
 <body>
 <div class="container">
     <h4 class="text-center">Телефонная книга</h4>
-    <form id="form" class="row g-3 needs-validation" novalidate>
-        <div class="col-4">
-            <label for="surname" class="form-label">Фамилия</label>
-            <input type="text" class="form-control" id="surname" required>
-            <div class="invalid-feedback">
-                Укажите фамилию, используйте только буквы и дефис.
-            </div>
-        </div>
-        <div class="col-4">
-            <label for="name" class="form-label">Имя</label>
-            <input type="text" class="form-control" id="name" required>
-            <div class="invalid-feedback">
-                Укажите имя, используйте только буквы и дефис.
-            </div>
-        </div>
-        <div class="col-4">
-            <label for="phone" class="form-label">Номер телефона</label>
-            <div class="input-group has-validation">
-                <span class="input-group-text" id="prepend">+7</span>
-                <input type="text" class="form-control" id="phone" required pattern="\d{3}-\d{3}-\d{4}">
+    <form id="form" class="needs-validation" novalidate>
+        <div class="row g-2 justify-content-end">
+            <div class="col-4">
+                <label for="surname" class="form-label">Фамилия</label>
+                <input type="text" class="form-control" id="surname" required>
                 <div class="invalid-feedback">
-                    Укажите номер телефона, используйте только цифры.<br>
-                    Указывать последние 10 цифр, без префикса "+7".
+                    Укажите фамилию, используйте только буквы и дефис.
                 </div>
             </div>
+            <div class="col-4">
+                <label for="name" class="form-label">Имя</label>
+                <input type="text" class="form-control" id="name" required>
+                <div class="invalid-feedback">
+                    Укажите имя, используйте только буквы и дефис.
+                </div>
+            </div>
+            <div class="col-4">
+                <label for="phone" class="form-label">Номер телефона</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text" id="prepend">+7</span>
+                    <input type="text" class="form-control" id="phone" required pattern="\d{3}-\d{3}-\d{4}">
+                    <div class="invalid-feedback">
+                        Укажите номер телефона, используйте только цифры.<br>
+                        Указывать последние 10 цифр, без префикса "+7".
+                    </div>
+                </div>
+            </div>
+            <button id="button" class="col-3 me-1 btn btn-primary" type="button">Добавить запись</button>
         </div>
-        <div class="col">
-            <button id="button" class="btn btn-primary" type="button">Добавить запись</button>
-        </div>
+
     </form>
-    <hr>
-    <table class="table">
+    <table class="table table-hover mt-5">
         <thead>
-        <tr>
+        <tr class="text-center">
             <th scope="col">№</th>
             <th scope="col">Фамилия</th>
             <th scope="col">Имя</th>
             <th scope="col">Номер телефона</th>
             <th scope="col">Действие</th>
-            <th scope="col"><label>
+            <th scope="col" class="text-start"><label>
                 <input type='checkbox' id="checkAll" class='form-check-input'>
                 Выбрать всё
             </label></th>
