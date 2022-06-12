@@ -1,18 +1,24 @@
 $(document).ready(function () {
-    $("#add_button").on("click", function () {
-        var textField = $("#text-field");
+    var textField = $("#text-field");
+
+    textField.on("input", function () {
+        textField.removeClass("is-invalid");
+    });
+
+    $("#add_button").click(function () {
         textField.val(textField.val().trim());
 
         if (textField.val() === "") {
-            alert("Input something.")
+            textField.addClass("is-invalid");
             return;
         }
 
+        textField.removeClass("is-invalid");
         var list = $(".list-group");
         var item = $("<li class='list-group-item d-flex text-break align-items-center'></li>");
         item.text(textField.val());
-        var editButton = getEditButton(item);
-        var removeButton = getRemoveButton(item);
+        var editButton = createEditButton(item);
+        var removeButton = createRemoveButton(item);
 
         editButton.appendTo(item);
         removeButton.appendTo(item);
@@ -21,57 +27,66 @@ $(document).ready(function () {
         textField.val("");
     });
 
-    function getRemoveButton(item) {
-        return $("<input type='button' value='Remove item' class='btn btn-outline-secondary'>")
-            .on("click", function () {
+    function createRemoveButton(item) {
+        return $("<button type='button' class='btn btn-outline-secondary text-nowrap remove_button'>Remove item</button>")
+            .click(function () {
                 item.remove();
             });
     }
 
-    function getEditButton(item) {
-        var editButton = $("<input type='button' class='btn btn-outline-secondary ms-auto me-1' value='Edit'>");
-        var editField = $("<input type='text' class='form-control ' value='" + item.text() + "'>");
-        var savedText = item.text();
+    function createEditButton(item) {
+        var savedText = item.contents().filter(function () {
+            return this.nodeType === Node.TEXT_NODE;
+        }).text();
 
-        editButton.on("click", function () {
+        var editButton = $("<button type='button' class='btn btn-outline-secondary ms-auto me-1 text-nowrap'>Edit</button>");
+        var editField = $("<input type='text' class='form-control flex-wrap' placeholder='An empty entry is prohibited'>");
+        editField.val(savedText);
+
+        editField.on("input", function () {
+            editField.removeClass("is-invalid");
+        });
+
+        editButton.click(function () {
             item.contents().filter(function () {
                 return this.nodeType === Node.TEXT_NODE;
             }).remove();
 
             editField.prependTo(item);
-            editButton.replaceWith(getSaveButton(editField, item));
+            editButton.replaceWith(createSaveButton(editField, item));
 
-            var cancelButton = getCancelButton(item, savedText);
+            var cancelButton = createCancelButton(item, savedText);
             cancelButton.insertAfter(item.children().eq(0));
         });
 
         return editButton;
     }
 
-    function getSaveButton(editField, item) {
-        var saveButton = $("<input type='button' class='btn btn-outline-secondary me-1' value='Save'>");
+    function createSaveButton(editField, item) {
+        var saveButton = $("<button type='button' class='btn btn-outline-secondary me-1 text-nowrap'>Save</button>");
 
-        saveButton.on("click", function () {
-            if (editField.val() === "") {
-                editField[0].placeholder = "An empty entry is prohibited.";
+        saveButton.click(function () {
+            if (editField.val().trim() === "") {
+                editField.addClass("is-invalid");
                 return;
             }
 
+            editField.removeClass("is-invalid");
             editField.replaceWith(editField.val());
             item.children().eq(0).remove();
-            saveButton.replaceWith(getEditButton(item));
+            saveButton.replaceWith(createEditButton(item));
         });
 
         return saveButton;
     }
 
-    function getCancelButton(item, savedText) {
-        var cancelButton = $("<input type='button' class='ms-1 me-1 btn btn-outline-secondary' value='Cancel'>");
+    function createCancelButton(item, savedText) {
+        var cancelButton = $("<button type='button' class='ms-1 me-1 btn btn-outline-secondary text-nowrap'>Cancel</button>");
 
-        cancelButton.on("click", function () {
+        cancelButton.click(function () {
             item.children().eq(0).replaceWith(savedText);
             item.children().eq(0).remove();
-            item.children().eq(0).replaceWith(getEditButton(item));
+            item.children().eq(0).replaceWith(createEditButton(item));
         });
 
         return cancelButton;

@@ -1,3 +1,12 @@
 .container {
     max-width: 800px;
 }
+
+.remove_button{
+    color: #d93246;
+    border-color: #d93246;
+}
+
+.is-invalid::placeholder{
+    color: #DC3545;
+}
