@@ -9,3 +9,8 @@
 .is-invalid::placeholder {
     color: #DC3545;
 }
+
+.remove_button {
+    color: #d93246;
+    border-color: #d93246;
+}
