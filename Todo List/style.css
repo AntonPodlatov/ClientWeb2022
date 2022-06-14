@@ -22,3 +22,7 @@ p {
     margin-right: 8px;
 }
 
+input::placeholder {
+    color: #DC3545;
+}
+
