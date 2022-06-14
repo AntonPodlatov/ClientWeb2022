@@ -28,11 +28,11 @@ $(document).ready(function () {
         }
     });
 
-    $("#button").on("click", function () {
-        var form = document.querySelector(".needs-validation");
+    $("#button").click(function () {
+        var form = $(".needs-validation");
 
-        if (!form.checkValidity()) {
-            form.classList.add('was-validated');
+        if (!form[0].checkValidity()) {
+            form.addClass('was-validated');
         } else {
             if ($.inArray(phoneField.val(), getPhoneArray()) !== -1) {
                 alert("Контакт с таким номером уже есть в списке.");
@@ -43,7 +43,7 @@ $(document).ready(function () {
             phoneField.val("");
             nameField.val("");
             surnameField.val("");
-            form.classList.remove("was-validated");
+            form.removeClass("was-validated");
         }
     });
 
@@ -67,19 +67,20 @@ $(document).ready(function () {
     }
 
     function createRemoveRowButton(row) {
-        return $("<input type='button' value='Удалить запись' class='btn btn-outline-secondary' data-bs-toggle='modal' data-bs-target='#removeConfirmation'>")
-            .on("click", function () {
+        return $("<input type='button' value='Удалить запись' class='btn btn-outline-danger'" +
+            " data-bs-toggle='modal' data-bs-target='#removeConfirmation'>")
+            .click(function () {
                 var content = $("#modal-content");
                 var checkedRows = getCheckedRows();
 
-                $("#canceledRemoveButton").on("click", function () {
+                $("#canceledRemoveButton").click(function () {
                     content.text("");
                 });
 
                 if (checkedRows.length > 0) {
                     content.text("Удалить отмеченные контакты?");
 
-                    $("#confirmedRemoveButton").on("click", function () {
+                    $("#confirmedRemoveButton").click(function () {
                         $.each(checkedRows, function () {
                             this.remove();
                         });
