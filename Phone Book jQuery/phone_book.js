@@ -56,7 +56,9 @@ $(document).ready(function () {
             "<tr class='tbody_row align-middle text-center'><td></td><td>" + surnameField.val() +
             "</td><td>" + nameField.val() +
             "</td><td class='phone_table_detail'>+7-" + phoneField.val() +
-            "</td><td></td><td class='text-start'><input type='checkbox' class='form-check-input tbody_checkbox'></td><tr>"
+            "</td><td></td><td class='text-start'>" +
+            "<label><input type='checkbox' class='form-check-input tbody_checkbox'>" +
+            " Выбрать</label></td><tr>"
         );
 
         var button = createRemoveRowButton(newRow);
