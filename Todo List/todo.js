@@ -70,6 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
         saveButton.value = "save";
 
         saveButton.addEventListener("click", function () {
+            editField.value = editField.value.trim();
+
             if (editField.value === "") {
                 editField.placeholder = "An empty entry is prohibited.";
                 return;
