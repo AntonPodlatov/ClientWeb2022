@@ -23,6 +23,9 @@ $(document).ready(function () {
     $("#button").click(function () {
         var form = $(".needs-validation");
 
+        nameField.val(nameField.val().trim());
+        surnameField.val(surnameField.val().trim());
+
         if (!form[0].checkValidity()) {
             form.addClass('was-validated');
         } else {
