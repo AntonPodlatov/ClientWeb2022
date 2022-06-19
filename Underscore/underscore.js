@@ -29,12 +29,14 @@
             return person.age >= 20 && person.age <= 30;
         })
         .map(function (person) {
-            return person.name
-        }).uniq(true, function (name) {
+            return person.name;
+        })
+        .uniq()
+        .sortBy(function (name) {
             return name;
-        }).sortBy(function (name) {
-            return name;
-        }).reverse().value();
+        })
+        .reverse()
+        .value();
 
     var namesCounts = _.countBy(persons, "name");
 
