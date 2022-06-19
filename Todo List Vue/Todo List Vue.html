@@ -38,7 +38,7 @@
         <li v-for="(item, index) in items" :key="item.id" class="list-group-item d-flex text-break align-items-center">
 
             <template v-if="!item.isEditing">
-                <span>{{ item.text }}</span>
+                {{ item.text }}
                 <button @click="editItem(item)"
                         type="button" class="ms-auto me-1 btn btn-outline-secondary">edit
                 </button>
@@ -46,9 +46,9 @@
 
             <template v-else>
                 <input v-model="item.editingText"
-                       @keyup="item.isEditTextInvalid=false"
+                       @keyup="item.isEditTextInvalid = false"
                        @keyup.enter="saveItem(item)"
-                       :class={"is-invalid":item.isEditTextInvalid}
+                       :class="{'is-invalid': item.isEditTextInvalid}"
                        type="text" class="form-control" placeholder="An empty entry is prohibited">
 
                 <button @click="cancelEditing(item)"
