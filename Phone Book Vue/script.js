@@ -14,7 +14,7 @@ new Vue({
         isNewPhoneDuplicate: false,
 
         records: [],
-        removeCallingRecord: {},
+        recordToDelete: {},
         currentItemId: 0,
 
         isAllChecked: false,
@@ -63,7 +63,7 @@ new Vue({
         },
 
         showRemovingDialog: function (record) {
-            this.removeCallingRecord = record;
+            this.recordToDelete = record;
             this.isSomethingChecked = false;
 
             var checkedRecords = this.records.filter(function (record) {
@@ -80,7 +80,7 @@ new Vue({
         },
 
         remove: function () {
-            var removeCallingRecord = this.removeCallingRecord;
+            var recordToDelete = this.recordToDelete;
 
             if (this.isSomethingChecked) {
                 this.records = this.records.filter(function (x) {
@@ -88,7 +88,7 @@ new Vue({
                 });
             } else {
                 this.records = this.records.filter(function (x) {
-                    return x !== removeCallingRecord;
+                    return x !== recordToDelete;
                 });
             }
 

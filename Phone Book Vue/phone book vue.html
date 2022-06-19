@@ -103,18 +103,19 @@
     <div class="modal fade" tabindex="-1" id="modal" ref="modal_window" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+
                 <div class="modal-header">
-                    <h5 v-show="isSomethingChecked" class="modal-title">Удаление</h5>
-                    <h5 v-show="!isSomethingChecked" class="modal-title">Удалить запись?</h5>
-                    <button type="button" class="btn-close"
-                            data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    <h5 v-if="isSomethingChecked" class="modal-title">Удаление</h5>
+                    <h5 v-else class="modal-title">Удалить запись?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
+
                 <div ref="modal_body" class="modal-body text-start">
-                    <div v-show="isSomethingChecked"><b>Удалить отмеченные записи?</b></div>
-                    <div v-show="!isSomethingChecked">
-                        <p><b>Фамилия: </b>{{ removeCallingRecord.surname }}</p>
-                        <p><b>Имя: </b>{{ removeCallingRecord.name }}</p>
-                        <p><b>Номер телефона: </b>{{ removeCallingRecord.phone }}</p>
+                    <div v-if="isSomethingChecked"><b>Удалить отмеченные записи?</b></div>
+                    <div v-else>
+                        <p><b>Фамилия: </b>{{ recordToDelete.surname }}</p>
+                        <p><b>Имя: </b>{{ recordToDelete.name }}</p>
+                        <p><b>Номер телефона: </b>{{ recordToDelete.phone }}</p>
                     </div>
                 </div>
 
