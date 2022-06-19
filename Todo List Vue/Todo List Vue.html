@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Todo List Vue</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
+
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
     <script defer src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="node_modules/vue/dist/vue.js"></script>
     <script defer src="script.js"></script>
-    <title>Todo List Vue</title>
 </head>
 <body>
 
@@ -17,9 +20,11 @@
     <div class="row mt-2 mb-3">
         <div class="col">
             <div class="input-group">
-                <input @keyup="isNewTextInvalid=false" @keyup.enter="addToList" v-model="newText" type="text"
-                       id="text-field"
-                       class="form-control me-2" placeholder="Input something" :class={"is-invalid":isNewTextInvalid}>
+                <input @keyup="isNewTextInvalid = false"
+                       @keyup.enter="addToList"
+                       v-model="newText"
+                       :class="{'is-invalid': isNewTextInvalid}"
+                       type="text" id="text-field" placeholder="Input something" class="form-control me-2">
                 <div class="input-group-append">
                     <button @click="addToList" type="button" id="add_button"
                             class="btn btn-outline-primary">Add to list
@@ -31,24 +36,29 @@
 
     <ul class="list-group">
         <li v-for="(item, index) in items" :key="item.id" class="list-group-item d-flex text-break align-items-center">
-            <span v-if="!item.isEditing">{{ item.text }}</span>
 
-            <button v-if="!item.isEditing" @click="editItem(item)"
-                    type="button" class="ms-auto me-1 btn btn-outline-secondary">edit
-            </button>
+            <template v-if="!item.isEditing">
+                <span>{{ item.text }}</span>
+                <button @click="editItem(item)"
+                        type="button" class="ms-auto me-1 btn btn-outline-secondary">edit
+                </button>
+            </template>
 
-            <input v-if="item.isEditing" v-model="item.editingText"
-                   @keyup="item.isEditTextInvalid=false" @keyup.enter="saveItem(item)"
-                   type="text" class="form-control" placeholder="An empty entry is prohibited"
-                   :class={"is-invalid":item.isEditTextInvalid}>
+            <template v-else>
+                <input v-model="item.editingText"
+                       @keyup="item.isEditTextInvalid=false"
+                       @keyup.enter="saveItem(item)"
+                       :class={"is-invalid":item.isEditTextInvalid}
+                       type="text" class="form-control" placeholder="An empty entry is prohibited">
 
-            <button v-if="item.isEditing" @click="cancelEditing(item)"
-                    type="button" class="ms-1 me-1 btn btn-outline-secondary text-nowrap">cancel
-            </button>
+                <button @click="cancelEditing(item)"
+                        type="button" class="ms-1 me-1 btn btn-outline-secondary text-nowrap">cancel
+                </button>
 
-            <button v-if="item.isEditing" @click="saveItem(item)"
-                    type="button" class="me-1 btn btn-outline-secondary text-nowrap">save
-            </button>
+                <button @click="saveItem(item)"
+                        type="button" class="me-1 btn btn-outline-secondary text-nowrap">save
+                </button>
+            </template>
 
             <button @click="removeItem(index)" type="button"
                     class="remove_button btn btn-outline-secondary text-nowrap">remove item
