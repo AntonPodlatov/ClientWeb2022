@@ -14,6 +14,7 @@ $(document).ready(function () {
         }
 
         textField.removeClass("is-invalid");
+
         var list = $(".list-group");
         var item = $("<li class='list-group-item d-flex text-break align-items-center'></li>");
         item.text(textField.val());
