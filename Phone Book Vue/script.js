@@ -66,13 +66,12 @@ new Vue({
             this.recordToDelete = record;
             this.isSomethingChecked = false;
 
-            var checkedRecords = this.records.filter(function (record) {
-                return record.isChecked;
+            var self = this;
+            this.records.forEach(function (record) {
+                if (record.isChecked) {
+                    self.isSomethingChecked = true;
+                }
             });
-
-            if (checkedRecords.length !== 0) {
-                this.isSomethingChecked = true;
-            }
 
             var modalWindow = this.$refs.modal_window;
             var modal = new bootstrap.Modal(modalWindow, {backdrop: true, keyboard: true, focus: true});
