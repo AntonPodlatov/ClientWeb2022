@@ -27,7 +27,7 @@ $(document).ready(function () {
         surnameField.val(surnameField.val().trim());
 
         if (!form[0].checkValidity()) {
-            form.addClass('was-validated');
+            form.addClass("was-validated");
         } else {
             if ($.inArray(phoneField.val(), getPhonesArray()) !== -1) {
                 alert("Контакт с таким номером уже есть в списке.");
@@ -69,36 +69,38 @@ $(document).ready(function () {
 
     function createRemoveRowButton(row) {
         return $("<input type='button' value='Удалить запись' class='btn btn-outline-danger'" +
-            " data-bs-toggle='modal' data-bs-target='#removeConfirmation'>")
+            " data-bs-toggle='modal' data-bs-target='#remove-confirmation'>")
             .click(function () {
                 var content = $("#modal-content");
                 var checkedRows = getCheckedRows();
 
-                $("#canceledRemoveButton").click(function () {
+                $("#canceled-remove-button").click(function () {
                     content.text("");
+                    $("#confirmed-remove-button").off("click");
                 });
                 $("#modal_window_close_button").click(function () {
                     content.text("");
+                    $("#confirmed-remove-button").off("click");
                 });
 
                 if (checkedRows.length > 0) {
                     content.text("Удалить отмеченные контакты?");
 
-                    $("#confirmedRemoveButton").click(function () {
+                    $("#confirmed-remove-button").click(function () {
                         $(checkedRows).remove();
                         content.text("");
                         $("#checkAll").prop("checked", false);
                     });
                 } else {
-                    var surname = row.children().get(1).innerHTML;
-                    var name = row.children().get(2).innerHTML;
-                    var phone = row.children().get(3).innerHTML;
+                    var surname = row.children().get(2).innerHTML;
+                    var name = row.children().get(3).innerHTML;
+                    var phone = row.children().get(4).innerHTML;
 
                     $("<p><b>Фамилия:</b> " + surname + "</p>").appendTo(content);
                     $("<p><b>Имя:</b> " + name + "</p>").appendTo(content);
                     $("<p><b>Номер телефона:</b> " + phone + "</p>").appendTo(content);
 
-                    $("#confirmedRemoveButton").on("click", function () {
+                    $("#confirmed-remove-button").on("click", function () {
                         row.remove();
                         content.text("");
                     });
