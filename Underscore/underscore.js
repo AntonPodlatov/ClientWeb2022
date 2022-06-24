@@ -10,7 +10,8 @@
         {age: 21, name: "Leonid"},
         {age: 35, name: "Constantin"},
         {age: 28, name: "Boris"},
-        {age: 27, name: "Boris"}
+        {age: 27, name: "Boris"},
+        {age: 19, name: "Boris"}
     ];
 
     var averageAge = _.reduce(persons, function (memo, person) {
