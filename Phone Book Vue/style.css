@@ -6,17 +6,6 @@
     max-width: 800px;
 }
 
-.table {
-    counter-reset: rowCounter 0;
-}
-
-.table td:nth-child(2)::before {
-    counter-increment: rowCounter 1;
-    content: counter(rowCounter);
-    text-align: center;
-    margin: 5px 10px;
-}
-
 .remove_button {
     color: #d93246;
     border-color: #d93246;

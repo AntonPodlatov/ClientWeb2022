@@ -8,10 +8,13 @@ new Vue({
         newSurname: "",
         newPhone: "",
 
+        nameRegex: /^[а-яА-ЯёЁa-zA-Z- ]*$/,
+
         isFormValidated: false,
         isNewNameInvalid: false,
         isNewSurnameInvalid: false,
         isNewPhoneDuplicate: false,
+
 
         records: [],
         recordToDelete: {},
@@ -45,7 +48,7 @@ new Vue({
                 name: this.newName,
                 surname: this.newSurname,
                 phone: "+7-" + this.newPhone,
-                isChecked: false,
+                isChecked: false
             });
 
             this.isFormValidated = false;
@@ -95,20 +98,16 @@ new Vue({
         },
 
         checkNewName: function () {
-            var nameRegex = /^[а-яА-ЯёЁa-zA-Z- ]*$/;
-            this.isNewNameInvalid = !nameRegex.test(this.newName);
+            this.isNewNameInvalid = !this.nameRegex.test(this.newName);
         },
 
         checkNewSurname: function () {
-            var nameRegex = /^[а-яА-ЯёЁa-zA-Z- ]*$/;
-            this.isNewSurnameInvalid = !nameRegex.test(this.newSurname);
+            this.isNewSurnameInvalid = !this.nameRegex.test(this.newSurname);
         },
 
         isNumberDuplicate: function (phone) {
             return this.records.some(function (record) {
-                if (record.phone.substring(3) === phone) {
-                    return true;
-                }
+                return record.phone.substring(3) === phone
             });
         }
     }
