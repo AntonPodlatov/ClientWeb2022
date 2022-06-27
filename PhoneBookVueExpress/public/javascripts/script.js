@@ -25,6 +25,8 @@ new Vue({
         newPhone: "",
         term: "",
 
+        nameRegex: /^[а-яА-ЯёЁa-zA-Z- ]*$/,
+
         isFormValidated: false,
         isNewNameInvalid: false,
         isNewSurnameInvalid: false,
@@ -155,13 +157,11 @@ new Vue({
         },
 
         checkNewName: function () {
-            var nameRegex = /^[а-яА-ЯёЁa-zA-Z- ]*$/;
-            this.isNewNameInvalid = !nameRegex.test(this.newName);
+            this.isNewNameInvalid = !this.nameRegex.test(this.newName);
         },
 
         checkNewSurname: function () {
-            var nameRegex = /^[а-яА-ЯёЁa-zA-Z- ]*$/;
-            this.isNewSurnameInvalid = !nameRegex.test(this.newSurname);
+            this.isNewSurnameInvalid = !this.nameRegex.test(this.newSurname);
         },
     }
 });

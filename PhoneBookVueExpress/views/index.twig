@@ -4,11 +4,11 @@
     {% verbatim %}
 <div v-cloak id="app" class="container">
     <h4 class="text-center mt-3">Телефонная книга</h4>
-    <form id="form" class="needs-validation" :class={"was-validated":isFormValidated} novalidate @submit.prevent>
+    <form id="form" class="needs-validation" :class="{'was-validated' : isFormValidated}" novalidate @submit.prevent>
         <div class="row g-2 justify-content-end">
             <div class="col-sm-4">
                 <label for="surname" class="form-label">Фамилия</label>
-                <input v-model="newSurname" @input="checkNewSurname" :class={"is-invalid":isNewSurnameInvalid}
+                <input v-model="newSurname" @input="checkNewSurname" :class="{'is-invalid' : isNewSurnameInvalid}"
                        type="text" class="form-control" required pattern="^[а-яА-ЯёЁa-zA-Z- ]*$">
                 <div class="invalid-feedback">
                     Укажите фамилию, используйте только буквы и дефис.
@@ -16,7 +16,7 @@
             </div>
             <div class="col-sm-4">
                 <label for="name" class="form-label">Имя</label>
-                <input v-model="newName" @input="checkNewName" :class={"is-invalid":isNewNameInvalid} type="text"
+                <input v-model="newName" @input="checkNewName" :class="{'is-invalid' : isNewNameInvalid}" type="text"
                        class="form-control" required pattern="^[а-яА-ЯёЁa-zA-Z- ]*$">
                 <div class="invalid-feedback">
                     Укажите имя, используйте только буквы и дефис.
@@ -29,7 +29,7 @@
                     <input @input="isNewPhoneDuplicate = false"
                            v-model="newPhone"
                            v-mask="'###-###-####'"
-                           :class={"is-invalid":isNewPhoneDuplicate}
+                           :class="{'is-invalid':isNewPhoneDuplicate}"
                            type="tel" class="form-control" required placeholder="777-777-7777"
                            pattern="\d{3}-\d{3}-\d{4}">
                     <div v-if="isNewPhoneDuplicate" class="invalid-feedback">
@@ -74,9 +74,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(record) in records" :key="record.id" class="tbody_row align-middle text-center">
+            <tr v-for="(record, index) in records" :key="record.id" class="tbody_row align-middle text-center">
                 <td><input type="checkbox" class="form-check-input" v-model="record.isChecked"></td>
-                <td></td>
+                <td>{{ index + 1 }}</td>
                 <td>
                     <div class="text-break text-wrap">{{ record.surname }}</div>
                 </td>
