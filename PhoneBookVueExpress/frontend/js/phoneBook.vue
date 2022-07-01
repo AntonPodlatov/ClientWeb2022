@@ -279,7 +279,7 @@ export default {
       this.isNewNameInvalid = !this.nameRegex.test(this.newName);
     },
 
-    checkNewSurname: function () {
+    checkNewSurname() {
       this.isNewSurnameInvalid = !this.nameRegex.test(this.newSurname);
     },
   }
