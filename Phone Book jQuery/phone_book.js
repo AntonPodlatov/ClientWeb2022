@@ -42,7 +42,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#checkAll").on("change", function () {
+    $("#check-all").on("change", function () {
         $(".tbody_checkbox").not(this).prop("checked", this.checked);
     });
 
@@ -73,6 +73,13 @@ $(document).ready(function () {
             .click(function () {
                 var content = $("#modal-content");
                 var checkedRows = getCheckedRows();
+                var modalWindow = $("#remove-confirmation");
+                var dialogTitle = $("#dialog-title");
+
+                modalWindow.on("hidden.bs.modal", function () {
+                    content.text("");
+                    $("#confirmed-remove-button").off("click");
+                });
 
                 $("#canceled-remove-button").click(function () {
                     content.text("");
@@ -84,14 +91,16 @@ $(document).ready(function () {
                 });
 
                 if (checkedRows.length > 0) {
+                    dialogTitle.text("Удаление");
                     content.text("Удалить отмеченные контакты?");
 
                     $("#confirmed-remove-button").click(function () {
                         $(checkedRows).remove();
                         content.text("");
-                        $("#checkAll").prop("checked", false);
+                        $("#check-all").prop("checked", false);
                     });
                 } else {
+                    dialogTitle.text("Удалить запись?");
                     var surname = row.children().get(2).innerHTML;
                     var name = row.children().get(3).innerHTML;
                     var phone = row.children().get(4).innerHTML;
