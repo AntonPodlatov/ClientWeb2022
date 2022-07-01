@@ -81,22 +81,12 @@ $(document).ready(function () {
                     $("#confirmed-remove-button").off("click");
                 });
 
-                $("#canceled-remove-button").click(function () {
-                    content.text("");
-                    $("#confirmed-remove-button").off("click");
-                });
-                $("#modal_window_close_button").click(function () {
-                    content.text("");
-                    $("#confirmed-remove-button").off("click");
-                });
-
                 if (checkedRows.length > 0) {
                     dialogTitle.text("Удаление");
                     content.text("Удалить отмеченные контакты?");
 
                     $("#confirmed-remove-button").click(function () {
                         $(checkedRows).remove();
-                        content.text("");
                         $("#check-all").prop("checked", false);
                     });
                 } else {
@@ -111,7 +101,6 @@ $(document).ready(function () {
 
                     $("#confirmed-remove-button").on("click", function () {
                         row.remove();
-                        content.text("");
                     });
                 }
             });
