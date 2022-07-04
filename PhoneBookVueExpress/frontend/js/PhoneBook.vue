@@ -1,20 +1,29 @@
 <template>
   <div v-cloak class="container">
     <h4 class="text-center mt-3">Телефонная книга</h4>
-    <form id="form" class="needs-validation" :class="{'was-validated' : isFormValidated}" novalidate @submit.prevent>
+    <form :class="{'was-validated' : isFormValidated}"
+          novalidate
+          @submit.prevent
+          id="form" class="needs-validation">
       <div class="row g-2 justify-content-end">
         <div class="col-sm-4">
           <label for="surname" class="form-label">Фамилия</label>
-          <input v-model="newSurname" @input="checkNewSurname" :class="{'is-invalid' : isNewSurnameInvalid}"
-                 type="text" class="form-control" required pattern="^[а-яА-ЯёЁa-zA-Z- ]*$">
+          <input v-model="newSurname"
+                 @input="checkNewSurname"
+                 :class="{'is-invalid' : isNewSurnameInvalid}"
+                 :pattern="nameRegex.source"
+                 type="text" class="form-control" required>
           <div class="invalid-feedback">
             Укажите фамилию, используйте только буквы и дефис.
           </div>
         </div>
         <div class="col-sm-4">
           <label for="name" class="form-label">Имя</label>
-          <input v-model="newName" @input="checkNewName" :class="{'is-invalid' : isNewNameInvalid}" type="text"
-                 class="form-control" required pattern="^[а-яА-ЯёЁa-zA-Z- ]*$">
+          <input v-model="newName"
+                 @input="checkNewName"
+                 :class="{'is-invalid' : isNewNameInvalid}"
+                 :pattern="nameRegex.source"
+                 type="text" class="form-control" required>
           <div class="invalid-feedback">
             Укажите имя, используйте только буквы и дефис.
           </div>
@@ -50,7 +59,7 @@
     <h4 class="mt-3">Поиск</h4>
     <form class="mt-2" @submit.prevent="loadRecords">
       <div class="d-flex">
-        <input v-model="term" type="text" class="form-control"/>
+        <input v-model.trim="term" type="text" class="form-control"/>
         <button type="submit" class="ms-2 btn btn-outline-primary">Поиск</button>
       </div>
     </form>
@@ -91,7 +100,7 @@
       </table>
     </div>
 
-    <div class="modal fade" tabindex="-1" id="modal" ref="modal_window" aria-hidden="true">
+    <div class="modal fade" tabindex="-1" id="modal" ref="modalWindow" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
 
@@ -128,24 +137,9 @@
 import Vue from "vue";
 import VueMask from "v-mask";
 import {Modal} from "bootstrap";
-import $ from "jquery";
+import Service from "./service.js";
 
 Vue.use(VueMask);
-
-function get(url, data) {
-  return $.get({
-    url,
-    data
-  });
-}
-
-function post(url, data) {
-  return $.post({
-    url,
-    data: JSON.stringify(data),
-    contentType: "application/json"
-  });
-}
 
 export default {
   data() {
@@ -156,6 +150,7 @@ export default {
       term: "",
 
       nameRegex: /^[а-яА-ЯёЁa-zA-Z- ]*$/,
+      service: new Service(),
 
       isFormValidated: false,
       isNewNameInvalid: false,
@@ -176,7 +171,8 @@ export default {
 
   methods: {
     loadRecords() {
-      get("api/getRecords", {term: this.term})
+
+      this.service.getRecords(this.term)
           .done(records => {
             records.forEach(record => {
               record["isChecked"] = false;
@@ -203,28 +199,27 @@ export default {
 
       console.log(this.newPhone);
 
-      post("/api/createRecord", {
-        name: this.newName,
-        surname: this.newSurname,
-        phone: "+7-" + this.newPhone
-      })
-          .done(res => {
-            if (res.success) {
-              this.loadRecords();
+      this.service.createRecord({
+            name: this.newName,
+            surname: this.newSurname,
+            phone: "+7-" + this.newPhone
+          }
+      ).done(res => {
+        if (res.success) {
+          this.loadRecords();
 
-              this.isFormValidated = false;
-              this.newSurname = "";
-              this.newName = "";
-              this.newPhone = "";
-            } else {
-              if (res.messageArray.includes("Phone is a duplicate.")) {
-                this.isNewPhoneDuplicate = true;
-              } else {
-                console.log(res.messageArray);
-              }
-            }
-          })
-          .fail(res => alert(res.message));
+          this.isFormValidated = false;
+          this.newSurname = "";
+          this.newName = "";
+          this.newPhone = "";
+        } else {
+          if (res.messageArray.includes("Phone is a duplicate.")) {
+            this.isNewPhoneDuplicate = true;
+          } else {
+            console.log(res.messageArray);
+          }
+        }
+      }).fail(res => alert(res.message));
     },
 
     checkAllCheckboxes() {
@@ -245,14 +240,14 @@ export default {
         }
       });
 
-      const modalWindow = this.$refs.modal_window;
+      const modalWindow = this.$refs.modalWindow;
       const modal = new Modal(modalWindow, {backdrop: true, keyboard: true, focus: true});
       modal.show();
     },
 
     remove() {
       const recordToDelete = this.recordToDelete;
-      let idArray = [];
+      const idArray = [];
 
       if (this.isSomethingChecked) {
         this.records.forEach(record => {
@@ -261,12 +256,10 @@ export default {
           }
         });
       } else {
-        idArray = [recordToDelete.id];
+        idArray.push(recordToDelete.id);
       }
 
-      post("api/removeRecord", {
-        idArray: idArray
-      }).done(res => {
+      this.service.removeRecord(idArray).done(res => {
         if (res.success) {
           this.loadRecords();
         } else {
