@@ -15,7 +15,6 @@ new Vue({
         isNewSurnameInvalid: false,
         isNewPhoneDuplicate: false,
 
-
         records: [],
         recordToDelete: {},
         currentItemId: 0,
@@ -76,7 +75,7 @@ new Vue({
                 }
             });
 
-            var modalWindow = this.$refs.modal_window;
+            var modalWindow = this.$refs.modalWindow;
             var modal = new bootstrap.Modal(modalWindow, {backdrop: true, keyboard: true, focus: true});
             modal.show();
         },
@@ -107,8 +106,8 @@ new Vue({
 
         isNumberDuplicate: function (phone) {
             return this.records.some(function (record) {
-                return record.phone.substring(3) === phone
+                return record.phone.substring(3) === phone;
             });
-        }
+        },
     }
 });
