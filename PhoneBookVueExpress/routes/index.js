@@ -1,18 +1,18 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
+router.get("/", (req, res, next) => {
     res.render("index", {title: "Express"});
 });
 
-var currentRecordId = 1;
-var records = [];
+let currentRecordId = 1;
+let records = [];
 
-router.get("/api/getRecords", function (req, res) {
-    var term = (req.query.term || "").toLowerCase();
+router.get("/api/getRecords", (req, res) => {
+    const term = (req.query.term || "").toLowerCase();
 
-    var result = term.length === 0 ? records : records.filter(function (x) {
+    const result = term.length === 0 ? records : records.filter(function (x) {
         return x.name.toLowerCase().includes(term) ||
             x.surname.toLowerCase().includes(term) ||
             x.phone.toLowerCase().includes(term);
@@ -21,9 +21,9 @@ router.get("/api/getRecords", function (req, res) {
     res.send(result);
 });
 
-router.post("/api/removeRecord", function (req, res) {
+router.post("/api/removeRecord", (req, res) => {
     var idArray = req.body.idArray;
-    console.log(idArray)
+    console.log(idArray);
 
     records = records.filter(function (x) {
         return idArray.indexOf(x.id) === -1;
@@ -35,11 +35,11 @@ router.post("/api/removeRecord", function (req, res) {
     });
 });
 
-router.post("/api/createRecord", function (req, res) {
-    var reqData = req.body;
+router.post("/api/createRecord", (req, res) => {
+    const reqData = req.body;
 
-    var errorArray = [];
-    var isError = false;
+    const errorArray = [];
+    let isError = false;
 
     if (!reqData.name) {
         isError = true;
@@ -72,7 +72,8 @@ router.post("/api/createRecord", function (req, res) {
     }
 
     currentRecordId++;
-    var record = {
+
+    const record = {
         id: currentRecordId,
         name: reqData.name,
         surname: reqData.surname,

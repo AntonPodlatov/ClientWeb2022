@@ -57,10 +57,9 @@
     </form>
 
     <h4 class="mt-3">Поиск</h4>
-    <form class="mt-2" @submit.prevent="loadRecords">
+    <form class="mt-2" @submit.prevent>
       <div class="d-flex">
-        <input v-model.trim="term" type="text" class="form-control"/>
-        <button type="submit" class="ms-2 btn btn-outline-primary">Поиск</button>
+        <input v-model.trim="term" @input="loadRecords" type="text" class="form-control"/>
       </div>
     </form>
 
@@ -172,15 +171,13 @@ export default {
   methods: {
     loadRecords() {
 
-      this.service.getRecords(this.term)
-          .done(records => {
-            records.forEach(record => {
-              record["isChecked"] = false;
-            });
+      this.service.getRecords(this.term).done(records => {
+        records.forEach(record => {
+          record["isChecked"] = false;
+        });
 
-            this.records = records;
-          })
-          .fail(() => alert("Can`t load records."));
+        this.records = records;
+      }).fail(() => alert("Can`t load records."));
     },
 
     addRecord() {
