@@ -68,6 +68,7 @@ router.post("/api/createRecord", (req, res) => {
             success: false,
             messageArray: errorArray
         });
+
         return;
     }
 
