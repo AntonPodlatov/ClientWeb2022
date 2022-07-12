@@ -10,7 +10,7 @@ import FavouriteMovies from "@/views/FavouriteMovies";
 
 const routes = [
     {
-        path: "/fav",
+        path: "/favourites",
         name: "FavouriteMovies",
         component: FavouriteMovies
     },

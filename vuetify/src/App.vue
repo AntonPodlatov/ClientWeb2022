@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <v-app-bar class="" app color="black" hide-on-scroll>
+    <v-app-bar app color="black" hide-on-scroll>
+
       <v-btn v-show="!isMainPaginationOrSearchResultsPage()"
              small
              fab
@@ -15,13 +16,15 @@
 
       <v-container>
         <v-row>
-
           <v-col class="col-sm-2">
             <v-btn href="/" dark class="text-h4" text>Moviefy</v-btn>
           </v-col>
 
           <v-col class="ms-1 col-sm-2">
-            <v-btn @click="goToFavourites()" class="ms-2" dark text>Favourite Movies</v-btn>
+            <v-btn v-show="!isFavourites()"
+                   @click="goToFavourites()"
+                   class="ms-2" dark text>Favourite Movies
+            </v-btn>
           </v-col>
           <v-spacer></v-spacer>
           <v-col cols="12" class="col-sm-3">
@@ -47,9 +50,7 @@
 
 <script>
 import service from "@/service";
-import storageService from "@/storageService";
 
-const StorageService = new storageService();
 const Service = new service();
 
 export default {
@@ -57,24 +58,25 @@ export default {
 
   data() {
     return {
-      searchFieldValue: "",
+      searchFieldValue: ""
     }
   },
 
   created() {
     this.getGenresNames();
-  //  this.setFavouriteMovies();
   },
 
   methods: {
     goToFavourites() {
-      if (this.$route.path !== "/fav") {
-        this.$router.push({path: '/fav'});
-      }
+      this.$router.push({path: '/favourites'});
     },
 
     isMainPaginationOrSearchResultsPage() {
       return /^\/$|^\/\d+$|^\/results\/\d+/.test(this.$route.path);
+    },
+
+    isFavourites() {
+      return /^\/favourites$/.test(this.$route.path);
     },
 
     getGenresNames() {
@@ -89,6 +91,10 @@ export default {
       });
     },
 
+    isMobile() {
+      return this.$vuetify.breakpoint.xsOnly;
+    },
+
     search() {
       if (this.searchFieldValue.trim() === "") {
         this.$router.push({path: "/"});
@@ -101,11 +107,7 @@ export default {
       if (!/^\/results\/\d+/.test(this.$route.path)) {
         this.$router.push({path: "/results/1"});
       }
-    },
-
- //   setFavouriteMovies() {
-    //  this.$store.commit("setFavouriteMovies", StorageService.getFavourites());
-//    }
+    }
   }
 }
 </script>
