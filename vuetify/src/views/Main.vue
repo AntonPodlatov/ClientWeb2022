@@ -4,7 +4,7 @@
               src="https://images.freeimages.com/images/large-previews/06a/cinema-1221624.jpg">
     <v-container>
 
-      <v-row class="main__movies-content justify-center">
+      <v-row class="mt-4 main__movies-content justify-center">
         <v-col v-for="movie in movies"
                cols="6"
                md="3"

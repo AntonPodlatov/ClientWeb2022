@@ -11,8 +11,7 @@
         </film-card>
       </v-col>
 
-
-      <v-col dark class="col-12 col-md-5">
+      <v-col v-if="!isUndefined(filmData.title)" dark class="col-12 col-md-5">
         <h1 class="mb-2">{{ titleAndYear }}</h1>
         <h3 class="mb-5">{{ filmData.tagline }}</h3>
         <p>{{ filmData.overview }}</p>
@@ -32,6 +31,18 @@
         <br>
         <v-btn target="_blank" text :href="filmData.homepage" color="white" class="pa-0">Homepage</v-btn>
       </v-col>
+      <div v-else>
+        <v-row
+            class="fill-height  ma-0"
+            align="center"
+            justify="center">
+          <v-progress-circular
+              class=""
+              indeterminate
+              color="grey lighten-5"
+          ></v-progress-circular>
+        </v-row>
+      </div>
 
       <v-col class="col-12 mt-12 fill-height">
         <p v-if="recommendations.length===0" class="text-h5 ms-sm-13">There are no recommendations for this movie.</p>
@@ -55,10 +66,10 @@
 
 <script>
 import ApiService from "@/service";
-
-const service = new ApiService();
 import FilmCard from "@/components/MovieCard";
 import {propertyOf} from "underscore/underscore-node";
+
+const service = new ApiService();
 
 export default {
   name: "movie",
@@ -100,6 +111,10 @@ export default {
       idS.forEach(id => genres.push(propertyOf(this.$store.state.genresIdToGenresNames)(id)));
 
       return genres;
+    },
+
+    isUndefined(obj) {
+      return obj === void 0;
     },
 
     scrollToTop() {

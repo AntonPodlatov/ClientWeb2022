@@ -117,7 +117,6 @@ export default {
   methods: {
     toggle() {
       StorageService.add(this.movie);
-      console.log(StorageService.getFavourites())
     },
 
     goToDetailedMoviePage() {
