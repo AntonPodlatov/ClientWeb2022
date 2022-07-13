@@ -2,7 +2,7 @@
   <v-container>
 
     <v-row class="justify-center">
-      <span v-if="movies.length === 0" class="text-h4">No results..</span>
+      <span v-if="movies.length === 0" class="white--text text-h5">Nothing found</span>
       <span v-else class="white--text text-h5">Results for  "{{ searchFieldValue }}":</span>
     </v-row>
 
@@ -71,6 +71,7 @@ export default {
     search(pageNumber) {
       this.service.search(pageNumber, this.searchFieldValue).then(res => {
         this.movies = res.data.results;
+
         this.pagesCount = res.data.total_pages;
         this.currentPageNumber = res.data.page;
 

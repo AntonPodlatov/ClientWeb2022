@@ -1,39 +1,42 @@
 <template>
   <v-parallax id="background" class="fill-height" width="" height="" :src="apiImagesUrl + filmData.backdrop_path">
-      <v-row class="mt-16 mt-md-12 mb-0">
+    <v-row class="mt-16 mt-md-12 mb-0">
 
-        <v-col class="pa-0 col-12 col-md-5">
+      <v-col class="pa-0 col-12 col-md-5">
 
-          <film-card :is-only-poster="true"
-                     :classNames="'mx-sm-16'"
-                     :movie="filmData"
-                     :api-images-url="apiImagesUrl">
-          </film-card>
-        </v-col>
+        <film-card :is-only-poster="true"
+                   :classNames="'mx-sm-16'"
+                   :movie="filmData"
+                   :api-images-url="apiImagesUrl">
+        </film-card>
+      </v-col>
 
 
-        <v-col dark class="col-12 col-md-5">
-          <h1 class="mb-2">{{ titleAndYear }}</h1>
-          <h3 class="mb-5">{{ filmData.tagline }}</h3>
-          <p>{{ filmData.overview }}</p>
-          <p>{{ "Release date: " + filmData.release_date }}</p>
-          <p>
-            Production:<br>
-            <span v-for="company in filmData.production_companies"
-                  :key="company.id">
+      <v-col dark class="col-12 col-md-5">
+        <h1 class="mb-2">{{ titleAndYear }}</h1>
+        <h3 class="mb-5">{{ filmData.tagline }}</h3>
+        <p>{{ filmData.overview }}</p>
+        <p>{{ "Release date: " + filmData.release_date }}</p>
+        <p>
+          Production:<br>
+          <span v-for="company in filmData.production_companies"
+                :key="company.id">
               {{ company.name }}<br>
             </span>
-          </p>
-          <p>TMDB rating: {{ filmData.vote_average }}</p>
-          <v-btn target="_blank" text :href="'https://www.imdb.com/title/' + filmData.imdb_id" color="white"
-                 class="pa-0">
-            IMBD page
-          </v-btn>
-          <br>
-          <v-btn target="_blank" text :href="filmData.homepage" color="white" class="pa-0">Homepage</v-btn>
-        </v-col>
+        </p>
+        <p>TMDB rating: {{ filmData.vote_average }}</p>
+        <v-btn target="_blank" text :href="'https://www.imdb.com/title/' + filmData.imdb_id" color="white"
+               class="pa-0">
+          IMBD page
+        </v-btn>
+        <br>
+        <v-btn target="_blank" text :href="filmData.homepage" color="white" class="pa-0">Homepage</v-btn>
+      </v-col>
 
-        <v-col class="col-12 mt-12 fill-height">
+      <v-col class="col-12 mt-12 fill-height">
+        <p v-if="recommendations.length===0" class="text-h5 ms-sm-13">There are no recommendations for this movie.</p>
+
+        <div v-else>
           <p class="text-h5 ms-sm-13">Recommendations</p>
           <v-slide-group ref="SlideGroup" class="align-self-center" dark show-arrows>
             <v-slide-item v-for="rec in recommendations" :key="rec.id">
@@ -43,9 +46,11 @@
               </film-card>
             </v-slide-item>
           </v-slide-group>
-        </v-col>
-      </v-row>
-    </v-parallax>
+        </div>
+
+      </v-col>
+    </v-row>
+  </v-parallax>
 </template>
 
 <script>
