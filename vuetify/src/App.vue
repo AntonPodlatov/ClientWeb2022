@@ -1,43 +1,38 @@
 <template>
   <v-app>
-    <v-app-bar app color="black" hide-on-scroll>
+    <v-app-bar app dark color="black" hide-on-scroll>
 
-      <v-btn v-show="!isMainPaginationOrSearchResultsPage()"
+      <v-btn v-if="isMoviePage()"
              small
              fab
              dark
              color="black"
-             class="me-16"
              @click="$router.back()">
-        <v-icon color="white">
-          mdi-chevron-left
-        </v-icon>
+        <v-icon color="white">mdi-chevron-left</v-icon>
       </v-btn>
 
-      <v-container>
-        <v-row>
-          <v-col class="col-sm-2">
-            <v-btn href="/" dark class="text-h4" text>Moviefy</v-btn>
-          </v-col>
 
-          <v-col class="ms-1 col-sm-2">
-            <v-btn v-show="!isFavourites()"
-                   @click="goToFavourites()"
-                   class="ms-2" dark text>Favourite Movies
-            </v-btn>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols="12" class="col-sm-3">
-            <v-text-field v-if="isMainPaginationOrSearchResultsPage()"
-                          dark
-                          label="Search"
-                          v-model="searchFieldValue"
-                          hide-details="auto"
-                          @input="search()">
-            </v-text-field>
-          </v-col>
-        </v-row>
-      </v-container>
+      <v-tabs class="px-sm-3">
+        <v-tab @change="goMain()" dark class="text">
+          Popular movies
+        </v-tab>
+
+        <v-tab @change="goToFavourites()" class="text" dark>
+          Favourite movies
+        </v-tab>
+
+        <v-spacer></v-spacer>
+
+        <v-tab>
+          <v-text-field dark
+                        label="Search"
+                        v-model="searchFieldValue"
+                        hide-details="auto"
+                        @input="search()">
+          </v-text-field>
+        </v-tab>
+      </v-tabs>
+
     </v-app-bar>
 
 
@@ -68,16 +63,21 @@ export default {
 
   methods: {
     goToFavourites() {
-      this.$router.push({path: '/favourites'});
+      if (this.$route.path !== "/favourites") {
+        this.$router.push({path: "/favourites"});
+      }
     },
 
-    isMainPaginationOrSearchResultsPage() {
-      return /^\/$|^\/\d+$|^\/results\/\d+/.test(this.$route.path);
+    goMain() {
+      if (this.$route.path !== "/") {
+        this.$router.push({path: "/"});
+      }
     },
 
-    isFavourites() {
-      return /^\/favourites$/.test(this.$route.path);
+    isMoviePage() {
+      return /^\/results\/movie\d+$|^\/movie\/\d+/.test(this.$route.path);
     },
+
 
     getGenresNames() {
       Service.getGenres().then(response => {
@@ -89,10 +89,6 @@ export default {
       }).catch(error => {
         console.log(error);
       });
-    },
-
-    isMobile() {
-      return this.$vuetify.breakpoint.xsOnly;
     },
 
     search() {
