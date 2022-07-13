@@ -127,7 +127,6 @@ export default {
       const slideGroup = this.$refs.SlideGroup;
       slideGroup.scrollTo("prev");
     }
-
   },
 
   watch: {
