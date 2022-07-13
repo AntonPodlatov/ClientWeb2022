@@ -9,7 +9,7 @@
             :class="[{ 'on-hover': hover}, classNames]"
             @click="goToDetailedMoviePage()">
 
-      <v-img :src="imagePath">
+      <v-img :src="imagePath" aspect-ratio="0.675">
 
         <template v-slot:placeholder>
           <v-row
