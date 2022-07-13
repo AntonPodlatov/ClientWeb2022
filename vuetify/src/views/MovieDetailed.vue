@@ -31,7 +31,8 @@
         <br>
         <v-btn target="_blank" text :href="filmData.homepage" color="white" class="pa-0">Homepage</v-btn>
       </v-col>
-      <div v-else>
+
+      <div class="ms-sm-16" v-else>
         <v-row
             class="fill-height  ma-0"
             align="center"
@@ -104,6 +105,8 @@ export default {
         this.recommendations = response.data.results;
         this.recommendations.forEach(recommendation => recommendation["genres"] = this.getMovieGenresNames(recommendation.genre_ids));
       });
+
+      this.scrollToTop();
     },
 
     getMovieGenresNames(idS) {
@@ -132,7 +135,6 @@ export default {
   watch: {
     $route() {
       this.createThis();
-      this.scrollToTop();
     }
   },
 
