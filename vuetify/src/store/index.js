@@ -6,8 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         genresIdToGenresNames: {},
-        searchFieldValue: "",
-        isSearchFieldEmpty: false
+        searchFieldValue: ""
     },
 
     getters: {},
@@ -20,17 +19,9 @@ export default new Vuex.Store({
         setSearchFieldValue(state, value) {
             state.searchFieldValue = value;
         },
-
-        toggleFieldIsEmptyProperty(state) {
-            state.isSearchFieldEmpty = !state.isSearchFieldEmpty;
-        }
     },
 
-    actions: {
-        toggleFieldIsEmptyProperty(context) {
-            context.commit("toggleFieldIsEmptyProperty");
-        }
-    },
+    actions: {},
 
     modules: {}
 })

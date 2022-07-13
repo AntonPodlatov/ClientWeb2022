@@ -1,6 +1,5 @@
 export default class {
     constructor() {
-        this.moviesIds = [];
         this.movies = this.getFavourites();
     }
 
@@ -28,12 +27,15 @@ export default class {
             return [];
         }
 
-        const favoritesArray = JSON.parse(favoritesJsonString);
+        return JSON.parse(favoritesJsonString);
+    }
 
-        favoritesArray.forEach(fav => {
-            this.moviesIds.push(fav.id);
+    getFavouritesIds() {
+        const moviesIds = [];
+        this.getFavourites().forEach(fav => {
+            moviesIds.push(fav.id);
         });
 
-        return favoritesArray;
+        return moviesIds;
     }
 }

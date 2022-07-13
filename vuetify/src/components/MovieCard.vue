@@ -110,7 +110,7 @@ export default {
 
   data() {
     return {
-      isCheckBoxChecked: StorageService.moviesIds.indexOf(this.movie.id) !== -1,
+      isCheckBoxChecked: StorageService.getFavouritesIds().indexOf(this.movie.id) !== -1,
     }
   },
 
