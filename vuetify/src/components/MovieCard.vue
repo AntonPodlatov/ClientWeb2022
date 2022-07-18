@@ -124,7 +124,10 @@ export default {
         return;
       }
 
-      this.$router.push({path: this.movieUrl + this.movie.id})
+      this.$store.commit("setMovieTitle", this.movie.title);
+      this.$store.commit("setLastMoviePath", "/movie/" + this.movie.id);
+
+      this.$router.push({path: this.movieUrl + this.movie.id});
     }
   },
 

@@ -6,7 +6,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         genresIdToGenresNames: {},
-        searchFieldValue: ""
+        searchFieldValue: "",
+        movieTitle: "",
+        lastMoviePath: ""
     },
 
     getters: {},
@@ -18,6 +20,14 @@ export default new Vuex.Store({
 
         setSearchFieldValue(state, value) {
             state.searchFieldValue = value;
+        },
+
+        setMovieTitle(state, title) {
+            state.movieTitle = title;
+        },
+
+        setLastMoviePath(state, path) {
+            state.lastMoviePath = path;
         },
     },
 

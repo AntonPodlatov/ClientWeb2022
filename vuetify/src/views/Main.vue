@@ -1,6 +1,5 @@
 <template>
   <v-parallax height=""
-              class="fill-height"
               src="https://images.freeimages.com/images/large-previews/06a/cinema-1221624.jpg">
     <v-container>
 

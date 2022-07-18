@@ -2,23 +2,20 @@
   <v-app>
     <v-app-bar app dark color="black" hide-on-scroll>
 
-      <v-btn v-if="isMoviePage()"
-             small
-             fab
-             dark
-             color="black"
-             @click="$router.back()">
-        <v-icon color="white">mdi-chevron-left</v-icon>
-      </v-btn>
-
-
-      <v-tabs class="px-sm-3">
+      <v-tabs v-model="tab" class="px-sm-3">
         <v-tab @change="goMain()" dark class="text">
           Popular movies
         </v-tab>
 
         <v-tab @change="goToFavourites()" class="text" dark>
           Favourite movies
+        </v-tab>
+
+        <v-tab v-if="$store.state.lastMoviePath"
+               @change="$router.push({path: $store.state.lastMoviePath})"
+               class="text"
+               dark>
+          {{ $store.state.movieTitle }}
         </v-tab>
 
         <v-spacer></v-spacer>
@@ -53,7 +50,9 @@ export default {
 
   data() {
     return {
-      searchFieldValue: ""
+      tab: null,
+      searchFieldValue: "",
+      currentMoviePath: ""
     }
   },
 
@@ -78,7 +77,6 @@ export default {
       return /^\/results\/movie\d+$|^\/movie\/\d+/.test(this.$route.path);
     },
 
-
     getGenresNames() {
       Service.getGenres().then(response => {
         const genresIdMap = {};
@@ -102,6 +100,14 @@ export default {
       //if not results page go to the results page
       if (!/^\/results\/\d+/.test(this.$route.path)) {
         this.$router.push({path: "/results/1"});
+      }
+    }
+  },
+
+  watch: {
+    $route() {
+      if (this.isMoviePage()) {
+        this.tab = 3;
       }
     }
   }
