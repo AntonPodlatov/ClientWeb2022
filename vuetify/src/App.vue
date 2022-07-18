@@ -11,8 +11,8 @@
           Favourite movies
         </v-tab>
 
-        <v-tab v-if="$store.state.lastMoviePath"
-               @change="$router.push({path: $store.state.lastMoviePath})"
+        <v-tab v-show="$store.state.lastMoviePath"
+               @change="goToDetailed()"
                class="text"
                dark>
           {{ $store.state.movieTitle }}
@@ -89,6 +89,12 @@ export default {
       });
     },
 
+    goToDetailedMoviePage() {
+      if (!this.isMoviePage()) {
+        this.$router.push({path: this.$store.state.lastMoviePath});
+      }
+    },
+
     search() {
       if (this.searchFieldValue.trim() === "") {
         this.$router.push({path: "/"});
@@ -107,7 +113,7 @@ export default {
   watch: {
     $route() {
       if (this.isMoviePage()) {
-        this.tab = 3;
+        this.tab = 2;
       }
     }
   }

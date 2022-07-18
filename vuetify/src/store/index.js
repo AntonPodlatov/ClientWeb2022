@@ -8,7 +8,8 @@ export default new Vuex.Store({
         genresIdToGenresNames: {},
         searchFieldValue: "",
         movieTitle: "",
-        lastMoviePath: ""
+        lastMoviePath: "",
+        lastMovieId: null
     },
 
     getters: {},
@@ -28,6 +29,9 @@ export default new Vuex.Store({
 
         setLastMoviePath(state, path) {
             state.lastMoviePath = path;
+        },
+        setLastMovieId(state, id) {
+            state.lastMovieId = id;
         },
     },
 

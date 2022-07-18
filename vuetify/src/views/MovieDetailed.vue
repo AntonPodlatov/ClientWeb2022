@@ -1,15 +1,16 @@
 <template>
   <v-parallax height=""
-         class="fill-height"
-         src="https://images.freeimages.com/images/large-previews/06a/cinema-1221624.jpg">
+              class="fill-height"
+              src="https://images.freeimages.com/images/large-previews/06a/cinema-1221624.jpg">
     <v-row class="mt-16 mt-md-12 mb-0">
 
       <v-col class="pa-0 col-12 col-md-5">
-
-        <film-card :is-only-poster="true"
-                   :classNames="'mx-sm-16'"
+        <film-card :classNames="'mx-sm-16'"
                    :movie="filmData"
-                   :api-images-url="apiImagesUrl">
+                   :api-images-url="apiImagesUrl"
+                   :is-only-poster="true"
+                   :id="$store.state.lastMovieId"
+        >
         </film-card>
       </v-col>
 
@@ -98,14 +99,14 @@ export default {
 
   updated() {
     this.$vuetify.goTo(12, {
-      duration: 600,
+      duration: 460,
       offset: 0,
       easing: "linear"
     });
   },
 
   methods: {
-    async createThis() {
+    createThis() {
       this.service.createMoviePage(this.$route.params.id).then(response => {
         this.filmData = response.data;
         this.dateString = this.filmData.release_date.substring(0, 4);
@@ -158,7 +159,7 @@ export default {
   filter: brightness(40%) blur(1px);
 }
 
-.eee:not(.contents){
+.eee:not(.contents) {
   filter: brightness(40%) blur(1px);
 }
 

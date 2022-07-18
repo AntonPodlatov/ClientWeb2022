@@ -105,12 +105,24 @@ export default {
     isOnlyPoster: {
       type: Boolean,
       required: false
+    },
+
+    id: {
+      type: Number,
+      required: false
     }
   },
 
   data() {
-    return {
-      isCheckBoxChecked: StorageService.getFavouritesIds().indexOf(this.movie.id) !== -1,
+    if (this.id) {
+      console.log(this.id)
+      return {
+        isCheckBoxChecked: StorageService.getFavouritesIds().indexOf(this.id) !== -1,
+      }
+    } else {
+      return {
+        isCheckBoxChecked: StorageService.getFavouritesIds().indexOf(this.movie.id) !== -1,
+      }
     }
   },
 
@@ -124,6 +136,7 @@ export default {
         return;
       }
 
+      this.$store.commit("setLastMovieId", this.movie.id);
       this.$store.commit("setMovieTitle", this.movie.title);
       this.$store.commit("setLastMoviePath", "/movie/" + this.movie.id);
 
