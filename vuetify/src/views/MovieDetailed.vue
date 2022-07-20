@@ -108,8 +108,11 @@ export default {
   methods: {
     createThis() {
       this.service.createMoviePage(this.$route.params.id).then(response => {
+
         this.filmData = response.data;
         this.dateString = this.filmData.release_date.substring(0, 4);
+      }).catch(() =>{
+        this.$router.push({path: "/not-found"});
       });
 
       this.service.getRecommendations(this.$route.params.id).then(response => {

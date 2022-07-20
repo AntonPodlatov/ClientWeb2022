@@ -12,7 +12,7 @@
         </v-tab>
 
         <v-tab v-show="$store.state.lastMoviePath"
-               @change="goToDetailed()"
+               @change="goToDetailedMoviePage()"
                class="text"
                dark>
           {{ $store.state.movieTitle }}
@@ -117,6 +117,7 @@ export default {
       }
     }
   }
+
 }
 </script>
 

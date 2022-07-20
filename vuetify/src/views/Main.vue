@@ -85,7 +85,7 @@ export default {
     },
 
     goToPage() {
-      this.$router.push({path: '/' + this.currentPageNumber});
+      this.$router.push({path: '/page/' + this.currentPageNumber});
       this.currentPageNumber = Number(this.$route.params.pageNumber);
       this.getPopularMovies(Number(this.$route.params.pageNumber));
     }

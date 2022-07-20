@@ -7,8 +7,15 @@ import Main from "@/views/Main.vue";
 import Movie from "@/views/MovieDetailed.vue";
 import SearchResults from "@/views/SearchResults.vue";
 import FavouriteMovies from "@/views/FavouriteMovies";
+import PageNotFound from "@/views/PageNotFound";
 
 const routes = [
+    {
+        path: "/",
+        name: "Root",
+        component: Main
+    },
+
     {
         path: "/favourites",
         name: "FavouriteMovies",
@@ -19,25 +26,31 @@ const routes = [
         name: "Movie",
         component: Movie
     },
+
     {
         path: "/results/movie/:id",
         name: "MovieFromSearchingResults",
         component: Movie
     },
+
     {
         path: "/results/:pageNumber",
         name: "SearchResults",
         component: SearchResults
     },
+
     {
-        path: "/:pageNumber",
+        path: "/page/:pageNumber",
         name: "Main",
         component: Main
     },
     {
-        path: "/",
-        name: "Root",
-        component: Main
+        path: "/not-found",
+        component: PageNotFound
+    },
+    {
+        path: "*",
+        redirect: "/not-found"
     }
 
 ]
