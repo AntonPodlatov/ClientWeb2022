@@ -3,7 +3,7 @@
               class="fill-height"
               src="https://images.freeimages.com/images/large-previews/06a/cinema-1221624.jpg">
     <v-container>
-      <v-row v-if="movies.length===0">
+      <v-row v-if="movies.length === 0">
         <v-col cols="12" class="text-center">
           <span class="text-h5">There's nothing here..</span>
         </v-col>
@@ -44,8 +44,7 @@ export default {
       storageService: new storageService(),
       service: new service(),
       movies: []
-    }
-
+    };
   },
 
   created() {

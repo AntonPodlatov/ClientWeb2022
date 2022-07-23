@@ -2,7 +2,6 @@
   <v-parallax height=""
               src="https://images.freeimages.com/images/large-previews/06a/cinema-1221624.jpg">
     <v-container>
-
       <v-row class="mt-4 main__movies-content justify-center">
         <v-col v-for="movie in movies"
                cols="6"
@@ -48,25 +47,24 @@ export default {
       movies: [],
       pagesCount: 500,
       currentPageNumber: Number(this.$route.params.pageNumber || 1)
-    }
+    };
   },
 
   created() {
     this.getPopularMovies(this.currentPageNumber);
   },
 
-
   methods: {
     getPopularMovies(pageNumber) {
       this.service.getPopularMovies(pageNumber).then(response => {
         this.movies = response.data.results;
-        this.movies.forEach(movie => movie["genres"] = this.getMovieGenresNames(movie.genre_ids));
+        this.movies.forEach(movie => movie.genres = this.getMovieGenresNames(movie.genre_ids));
       }).catch(error => {
         alert("Can`t load data.");
         console.log(error);
       });
 
-      setTimeout(this.scrollToTop,500);
+      setTimeout(this.scrollToTop, 500);
 
     },
 
@@ -79,13 +77,11 @@ export default {
     },
 
     getMovieGenresNames(idS) {
-      const genres = [];
-      idS.forEach(id => genres.push(propertyOf(this.$store.state.genresIdToGenresNames)(id)));
-      return genres;
+      return idS.map(genreID => propertyOf(this.$store.state.genresIdToGenresNames)(genreID));
     },
 
     goToPage() {
-      this.$router.push({path: '/page/' + this.currentPageNumber});
+      this.$router.push({path: "/page/" + this.currentPageNumber});
       this.currentPageNumber = Number(this.$route.params.pageNumber);
       this.getPopularMovies(Number(this.$route.params.pageNumber));
     }

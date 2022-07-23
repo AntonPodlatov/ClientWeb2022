@@ -24,6 +24,7 @@
           v-model="currentPageNumber">
       </v-pagination>
     </div>
+
   </v-container>
 </template>
 
@@ -49,7 +50,7 @@ export default {
       pagesCount: 0,
       currentPageNumber: Number(this.$route.params.pageNumber || 1),
       searchFieldValue: this.$store.state.searchFieldValue
-    }
+    };
   },
 
 
@@ -75,33 +76,31 @@ export default {
         this.pagesCount = res.data.total_pages;
         this.currentPageNumber = res.data.page;
 
-        this.movies.forEach(movie => movie["genres"] = this.getMovieGenresNames(movie.genre_ids));
+        this.movies.forEach(movie => movie.genres = this.getMovieGenresNames(movie.genre_ids));
       }).catch(error => {
         alert("Can`t load data.");
         console.log(error);
       });
 
-      setTimeout(this.scrollToTop,500);
+      setTimeout(this.scrollToTop, 500);
     },
 
     getMovieGenresNames(idS) {
-      const genres = [];
-      idS.forEach(id => genres.push(propertyOf(this.$store.state.genresIdToGenresNames)(id)));
-      return genres;
+      return idS.map(genreID => propertyOf(this.$store.state.genresIdToGenresNames)(genreID));
     },
 
     scrollToTop() {
       window.scrollTo({
         top: 0,
         left: 0,
-        behavior: 'smooth'
+        behavior: "smooth"
       });
     },
   },
 
   watch: {
     currentPageNumber() {
-      this.$router.push({path: '/results/' + this.currentPageNumber});
+      this.$router.push({path: "/results/" + this.currentPageNumber});
       this.search(Number(this.$route.params.pageNumber), this.searchFieldValue);
     }
   }

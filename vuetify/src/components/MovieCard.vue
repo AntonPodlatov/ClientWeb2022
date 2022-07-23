@@ -1,4 +1,5 @@
 <template>
+
   <v-hover
       v-slot="{ hover }"
       close-delay="100">
@@ -7,10 +8,21 @@
             dark
             :elevation="hover ? 14 : 1"
             :class="[{ 'on-hover': hover}, classNames]"
-            @click="goToDetailedMoviePage()">
+            @click="goToDetailedMoviePage">
+
+      <v-snackbar v-model="snackbar"
+                  timeout="1500"
+                  color="red"
+      >
+        <span v-if="isCheckBoxChecked" class="text-center">
+          Added to favourite movies.
+        </span>
+        <span v-else>
+          Removed from favourite movies.
+        </span>
+      </v-snackbar>
 
       <v-img :src="imagePath" aspect-ratio="0.675">
-
         <template v-slot:placeholder>
           <v-row
               class="fill-height  ma-0"
@@ -23,26 +35,26 @@
             ></v-progress-circular>
           </v-row>
         </template>
-
         <div class="d-flex justify-space-between align-start">
           <v-badge color="black"
                    class="mt-2 subtitle-2"
                    inline
                    tile
-                   :content="movie.vote_average || 'no data'"></v-badge>
+                   :content="movie.vote_average || 'no data'">
+          </v-badge>
           <v-checkbox class="pt-0 mt-2"
                       @click.stop
                       color="red"
                       v-if="hover || isCheckBoxChecked"
                       v-model="isCheckBoxChecked"
-                      @change="toggle()"
-                      off-icon="mdi-check"
-                      on-icon="mdi-check-outline"></v-checkbox>
+                      @change="toggle"
+                      off-icon="mdi-heart-outline"
+                      on-icon="mdi-heart-outline">
+          </v-checkbox>
         </div>
       </v-img>
 
       <div v-if="!isOnlyPoster">
-
         <v-card-title class="ps-2 pb-1 pt-2 pe-1 justify-md-space-between">
           <span class="text-truncate text-body-1 font-weight-medium">{{ movie.title }}</span>
         </v-card-title>
@@ -65,6 +77,7 @@
 
 <script>
 import storageService from "@/storageService";
+//import {isUndefined} from "underscore";
 
 const StorageService = new storageService();
 
@@ -78,56 +91,49 @@ export default {
     },
 
     apiImagesUrl: {
-      type: String,
-      required: false
+      type: String
     },
 
     movieUrl: {
-      type: String,
-      required: false
+      type: String
     },
 
     width: {
-      type: Number,
-      required: false
+      type: Number
     },
 
     height: {
-      type: Number,
-      required: false
+      type: Number
     },
 
     classNames: {
-      type: String,
-      required: false
+      type: String
     },
 
     isOnlyPoster: {
-      type: Boolean,
-      required: false
+      type: Boolean
     },
 
     id: {
-      type: Number,
-      required: false
+      type: Number
     }
   },
 
   data() {
-    if (this.id) {
-      console.log(this.id)
-      return {
-        isCheckBoxChecked: StorageService.getFavouritesIds().indexOf(this.id) !== -1,
-      }
-    } else {
-      return {
-        isCheckBoxChecked: StorageService.getFavouritesIds().indexOf(this.movie.id) !== -1,
-      }
-    }
+    return {
+      isCheckBoxChecked: StorageService.getFavouritesIds().indexOf(Number(this.movie.id)) !== -1,
+      snackbar: false
+    };
   },
 
   methods: {
     toggle() {
+      if (this.snackbar === true) {
+        this.snackbar = true
+      } else {
+        this.snackbar = !this.snackbar;
+      }
+
       StorageService.add(this.movie);
     },
 
@@ -147,6 +153,14 @@ export default {
   computed: {
     imagePath() {
       return this.apiImagesUrl + this.movie.poster_path;
+    }
+  },
+
+  watch: {
+    $route() {
+      if (this.isOnlyPoster) {
+        this.isCheckBoxChecked = StorageService.getFavouritesIds().indexOf(Number(this.$route.params.id)) !== -1;
+      }
     }
   }
 }

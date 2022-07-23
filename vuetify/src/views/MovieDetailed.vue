@@ -5,11 +5,11 @@
     <v-row class="mt-16 mt-md-12 mb-0">
 
       <v-col class="pa-0 col-12 col-md-5">
-        <film-card :classNames="'mx-sm-16'"
+        <film-card v-if="!isUndefined(filmData.id)"
+                   :classNames="'mx-sm-16'"
                    :movie="filmData"
                    :api-images-url="apiImagesUrl"
                    :is-only-poster="true"
-                   :id="$store.state.lastMovieId"
         >
         </film-card>
       </v-col>
@@ -49,7 +49,7 @@
       </div>
 
       <v-col class="col-12 mt-12 fill-height">
-        <p v-if="recommendations.length===0" class="white--text text-h5 ms-sm-13">
+        <p v-if="recommendations.length === 0" class="white--text text-h5 ms-sm-13">
           There are no recommendations for this movie.</p>
         <div v-else>
           <p class="text-h5 ms-sm-13">Recommendations</p>
@@ -82,6 +82,7 @@ export default {
     FilmCard
   },
 
+
   data() {
     return {
       service: service,
@@ -111,21 +112,18 @@ export default {
 
         this.filmData = response.data;
         this.dateString = this.filmData.release_date.substring(0, 4);
-      }).catch(() =>{
+      }).catch(() => {
         this.$router.push({path: "/not-found"});
       });
 
       this.service.getRecommendations(this.$route.params.id).then(response => {
         this.recommendations = response.data.results;
-        this.recommendations.forEach(recommendation => recommendation["genres"] = this.getMovieGenresNames(recommendation.genre_ids));
+        this.recommendations.forEach(recommendation => recommendation.genres = this.getMovieGenresNames(recommendation.genre_ids));
       });
     },
 
     getMovieGenresNames(idS) {
-      const genres = [];
-      idS.forEach(id => genres.push(propertyOf(this.$store.state.genresIdToGenresNames)(id)));
-
-      return genres;
+      return idS.map(genreID => propertyOf(this.$store.state.genresIdToGenresNames)(genreID));
     },
 
     isUndefined(obj) {
@@ -161,9 +159,4 @@ export default {
 .v-parallax__image-container {
   filter: brightness(40%) blur(1px);
 }
-
-.eee:not(.contents) {
-  filter: brightness(40%) blur(1px);
-}
-
 </style>

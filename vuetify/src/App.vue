@@ -3,35 +3,29 @@
     <v-app-bar app dark color="black" hide-on-scroll>
 
       <v-tabs v-model="tab" class="px-sm-3">
-        <v-tab @change="goMain()" dark class="text">
+        <v-tab @change="goMain" dark class="text">
           Popular movies
         </v-tab>
-
-        <v-tab @change="goToFavourites()" class="text" dark>
+        <v-tab @change="goToFavourites" class="text" dark>
           Favourite movies
         </v-tab>
-
         <v-tab v-show="$store.state.lastMoviePath"
-               @change="goToDetailedMoviePage()"
+               @change="goToDetailedMoviePage"
                class="text"
                dark>
           {{ $store.state.movieTitle }}
         </v-tab>
-
         <v-spacer></v-spacer>
-
         <v-tab>
           <v-text-field dark
                         label="Search"
                         v-model="searchFieldValue"
                         hide-details="auto"
-                        @input="search()">
+                        @input="search">
           </v-text-field>
         </v-tab>
       </v-tabs>
-
     </v-app-bar>
-
 
     <v-main>
       <router-view></router-view>
@@ -117,7 +111,6 @@ export default {
       }
     }
   }
-
 }
 </script>
 
