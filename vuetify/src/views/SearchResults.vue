@@ -1,7 +1,7 @@
 <template>
   <v-container>
 
-    <v-row class="justify-center">
+    <v-row class="justify-center mt-1">
       <span v-if="movies.length === 0" class="white--text text-h5">Nothing found</span>
       <span v-else class="white--text text-h5">Results for  "{{ searchFieldValue }}":</span>
     </v-row>
@@ -29,11 +29,9 @@
 </template>
 
 <script>
-import ApiService from "@/service";
 import MovieCard from "@/components/MovieCard";
 import {propertyOf} from "underscore";
 
-const service = new ApiService();
 
 export default {
   name: "SearchingResults",
@@ -44,8 +42,8 @@ export default {
 
   data() {
     return {
-      service: service,
-      apiImagesUrl: service.smallImagesUrl,
+      service: this.$store.state.service,
+      apiImagesUrl: String(this.$store.state.service.smallImagesUrl),
       movies: [],
       pagesCount: 0,
       currentPageNumber: Number(this.$route.params.pageNumber || 1),

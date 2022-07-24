@@ -7,7 +7,10 @@
                cols="6"
                md="3"
                :key="movie.id">
-          <movie-card :movie-url="'movie/'" :movie="movie" :api-images-url="apiImagesUrl"></movie-card>
+          <movie-card :movie-url="'movie/'"
+                      :movie="movie"
+                      :api-images-url="$store.state.service.smallImagesUrl"
+          ></movie-card>
         </v-col>
       </v-row>
 
@@ -28,10 +31,8 @@
 
 <script>
 import {propertyOf} from "underscore"
-import ApiService from "@/service";
 import MovieCard from "@/components/MovieCard";
 
-const service = new ApiService();
 
 export default {
   name: "Main",
@@ -42,8 +43,6 @@ export default {
 
   data() {
     return {
-      service: service,
-      apiImagesUrl: service.smallImagesUrl,
       movies: [],
       pagesCount: 500,
       currentPageNumber: Number(this.$route.params.pageNumber || 1)
@@ -56,7 +55,7 @@ export default {
 
   methods: {
     getPopularMovies(pageNumber) {
-      this.service.getPopularMovies(pageNumber).then(response => {
+      this.$store.state.service.getPopularMovies(pageNumber).then(response => {
         this.movies = response.data.results;
         this.movies.forEach(movie => movie.genres = this.getMovieGenresNames(movie.genre_ids));
       }).catch(error => {

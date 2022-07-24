@@ -27,8 +27,6 @@
 
 </template>
 <script>
-import storageService from "@/storageService";
-import service from "@/service";
 import MovieCard from "@/components/MovieCard";
 
 
@@ -41,8 +39,8 @@ export default {
 
   data() {
     return {
-      storageService: new storageService(),
-      service: new service(),
+      storageService: this.$store.state.storageService,
+      service: this.$store.state.service,
       movies: []
     };
   },

@@ -15,7 +15,6 @@ const routes = [
         name: "Root",
         component: Main
     },
-
     {
         path: "/favourites",
         name: "FavouriteMovies",
@@ -26,7 +25,10 @@ const routes = [
         name: "Movie",
         component: Movie
     },
-
+    {
+        path: "/page/movie/:id",
+        redirect: "/movie/:id"
+    },
     {
         path: "/results/movie/:id",
         name: "MovieFromSearchingResults",

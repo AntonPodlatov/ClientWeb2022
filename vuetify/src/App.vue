@@ -1,7 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app dark color="black" hide-on-scroll>
-
+    <v-app-bar v-if="windowWidth >= 750" app dark color="black" hide-on-scroll>
       <v-tabs v-model="tab" class="px-sm-3">
         <v-tab @change="goMain" dark class="text">
           Popular movies
@@ -27,6 +26,39 @@
       </v-tabs>
     </v-app-bar>
 
+    <v-expansion-panels v-else dark tile>
+      <v-expansion-panel class="pb-2">
+        <v-expansion-panel-header class="mt-1">{{ $store.state.menuHeaderText }}</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <v-row class="d-flex mt-1">
+            <v-btn class="col-12 flex-grow-1 mb-1"
+                   @click="goMain"
+                   dark>
+              Popular movies
+            </v-btn>
+            <v-btn class="col-12 flex-grow-1 mb-1"
+                   @click="goToFavourites"
+                   dark>
+              Favourite movies
+            </v-btn>
+            <v-btn class="text-truncate col-12 flex-grow-1 mb-2"
+                   v-show="$store.state.lastMoviePath"
+                   @click="goToDetailedMoviePage"
+                   dark>
+              Last visited: {{ $store.state.movieTitle }}
+            </v-btn>
+            <v-text-field dark
+                          label="Search"
+                          v-model="searchFieldValue"
+                          hide-details="auto"
+                          @input="search">
+            </v-text-field>
+          </v-row>
+
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+
     <v-main>
       <router-view></router-view>
     </v-main>
@@ -35,10 +67,6 @@
 </template>
 
 <script>
-import service from "@/service";
-
-const Service = new service();
-
 export default {
   name: 'App',
 
@@ -46,7 +74,8 @@ export default {
     return {
       tab: null,
       searchFieldValue: "",
-      currentMoviePath: ""
+      currentMoviePath: "",
+      windowWidth: window.innerWidth
     }
   },
 
@@ -57,12 +86,14 @@ export default {
   methods: {
     goToFavourites() {
       if (this.$route.path !== "/favourites") {
+        this.$store.commit("setMenuHeaderText", "Favourite movies");
         this.$router.push({path: "/favourites"});
       }
     },
 
     goMain() {
       if (this.$route.path !== "/") {
+        this.$store.commit("setMenuHeaderText", "Popular movies");
         this.$router.push({path: "/"});
       }
     },
@@ -72,11 +103,12 @@ export default {
     },
 
     getGenresNames() {
-      Service.getGenres().then(response => {
+      this.$store.state.service.getGenres().then(response => {
         const genresIdMap = {};
         response.data.genres.forEach(genre => {
           genresIdMap[genre.id] = genre.name;
         });
+
         this.$store.commit("setGenres", genresIdMap);
       }).catch(error => {
         console.log(error);
@@ -84,6 +116,8 @@ export default {
     },
 
     goToDetailedMoviePage() {
+      this.$store.commit("setMenuHeaderText", this.$store.state.movieTitle);
+
       if (!this.isMoviePage()) {
         this.$router.push({path: this.$store.state.lastMoviePath});
       }
@@ -91,6 +125,7 @@ export default {
 
     search() {
       if (this.searchFieldValue.trim() === "") {
+        this.menuHeaderText = "Search";
         this.$router.push({path: "/"});
         return;
       }
@@ -104,10 +139,24 @@ export default {
     }
   },
 
+  mounted() {
+    window.onresize = () => {
+      this.windowWidth = window.innerWidth
+    }
+  },
+
   watch: {
     $route() {
       if (this.isMoviePage()) {
         this.tab = 2;
+      }
+    },
+
+    windowWidth() {
+      if (this.windowWidth < 750) {
+        this.$store.commit("setIsMobile", true);
+      } else {
+        this.$store.commit("setIsMobile", false);
       }
     }
   }

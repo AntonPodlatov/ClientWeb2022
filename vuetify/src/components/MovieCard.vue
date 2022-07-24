@@ -1,5 +1,4 @@
 <template>
-
   <v-hover
       v-slot="{ hover }"
       close-delay="100">
@@ -11,14 +10,18 @@
             @click="goToDetailedMoviePage">
 
       <v-snackbar v-model="snackbar"
-                  timeout="1500"
+                  timeout="1300"
                   color="red"
+                  tag="'v-img'"
+                  centered
+                  :absolute="true"
+                  content-class="d-flex  px-0 justify-center"
       >
         <span v-if="isCheckBoxChecked" class="text-center">
-          Added to favourite movies.
+          Added to favourites.
         </span>
         <span v-else>
-          Removed from favourite movies.
+          Removed from favourites.
         </span>
       </v-snackbar>
 
@@ -45,7 +48,7 @@
           <v-checkbox class="pt-0 mt-2"
                       @click.stop
                       color="red"
-                      v-if="hover || isCheckBoxChecked"
+                      v-if="hover || isCheckBoxChecked || $store.state.isMobile"
                       v-model="isCheckBoxChecked"
                       @change="toggle"
                       off-icon="mdi-heart-outline"
@@ -76,11 +79,6 @@
 </template>
 
 <script>
-import storageService from "@/storageService";
-//import {isUndefined} from "underscore";
-
-const StorageService = new storageService();
-
 export default {
   name: "FilmCard",
 
@@ -116,13 +114,21 @@ export default {
 
     id: {
       type: Number
+    },
+
+    absolutePropForSnackbar: {
+      type: Boolean,
+      default: false
     }
+
   },
 
   data() {
     return {
-      isCheckBoxChecked: StorageService.getFavouritesIds().indexOf(Number(this.movie.id)) !== -1,
-      snackbar: false
+      snackbar: false,
+      isCheckBoxChecked: this.$store.state.storageService
+          .getFavouritesIds()
+          .indexOf(Number(this.movie.id)) !== -1
     };
   },
 
@@ -134,16 +140,19 @@ export default {
         this.snackbar = !this.snackbar;
       }
 
-      StorageService.add(this.movie);
+      this.$store.state.storageService.add(this.movie);
     },
 
     goToDetailedMoviePage() {
       if (this.isOnlyPoster) {
+        this.toggle();
+        this.isCheckBoxChecked = !this.isCheckBoxChecked;
         return;
       }
 
       this.$store.commit("setLastMovieId", this.movie.id);
       this.$store.commit("setMovieTitle", this.movie.title);
+      this.$store.commit("setMenuHeaderText", this.movie.title);
       this.$store.commit("setLastMoviePath", "/movie/" + this.movie.id);
 
       this.$router.push({path: this.movieUrl + this.movie.id});
@@ -159,9 +168,18 @@ export default {
   watch: {
     $route() {
       if (this.isOnlyPoster) {
-        this.isCheckBoxChecked = StorageService.getFavouritesIds().indexOf(Number(this.$route.params.id)) !== -1;
+        this.isCheckBoxChecked = this.$store.state.storageService
+            .getFavouritesIds()
+            .indexOf(Number(this.$route.params.id)) !== -1;
       }
     }
   }
 }
 </script>
+
+<style scoped lang="sass">
+::v-deep .v-snack__wrapper
+  min-width: 95%
+  padding-left: 10px
+  padding-right: 5px
+</style>
