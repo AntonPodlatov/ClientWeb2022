@@ -29,7 +29,6 @@
 <script>
 import MovieCard from "@/components/MovieCard";
 
-
 export default {
   name: "FavouriteMovies",
 
@@ -54,7 +53,7 @@ export default {
       this.movies = this.storageService.getFavourites();
     }
   }
-}
+};
 </script>
 
 <style scoped>

@@ -30,9 +30,8 @@
 </template>
 
 <script>
-import {propertyOf} from "underscore"
+import {propertyOf} from "underscore";
 import MovieCard from "@/components/MovieCard";
-
 
 export default {
   name: "Main",
@@ -64,7 +63,6 @@ export default {
       });
 
       setTimeout(this.scrollToTop, 500);
-
     },
 
     async scrollToTop() {
@@ -85,5 +83,5 @@ export default {
       this.getPopularMovies(Number(this.$route.params.pageNumber));
     }
   }
-}
+};
 </script>

@@ -1,6 +1,8 @@
-const { defineConfig } = require('@vue/cli-service')
+const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
+  lintOnSave: process.env.NODE_ENV !== "production",
+
   transpileDependencies: [
-    'vuetify'
+    "vuetify"
   ]
-})
+});

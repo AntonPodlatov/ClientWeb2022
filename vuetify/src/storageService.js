@@ -4,16 +4,16 @@ export default class {
     }
 
     add(movie) {
-        const movieIndex = this.movies.findIndex(movieFromStorage => movieFromStorage["id"] === movie["id"]);
+        const movieIndex = this.movies.findIndex(movieFromStorage => movieFromStorage.id === movie.id);
 
         if (movieIndex !== -1) {
             this.movies.splice(movieIndex, 1);
         } else {
             this.movies.push({
-                id: movie["id"],
-                title: movie["title"],
-                poster_path: movie["poster_path"],
-                vote_average: movie["vote_average"]
+                id: movie.id,
+                title: movie.title,
+                poster_path: movie.poster_path,
+                vote_average: movie.vote_average
             });
         }
 
@@ -31,11 +31,8 @@ export default class {
     }
 
     getFavouritesIds() {
-        const moviesIds = [];
-        this.getFavourites().forEach(fav => {
-            moviesIds.push(fav.id);
+        return this.getFavourites().map(fav => {
+            return fav.id;
         });
-
-        return moviesIds;
     }
 }

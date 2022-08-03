@@ -84,16 +84,12 @@ export default {
     FilmCard
   },
 
-
   data() {
     return {
-      service: this.$store.state.service,
-      apiImagesUrl: this.$store.state.service.imagesSourceUrl,
-      apiSmallImagesUrl: this.$store.state.service.smallImagesUrl,
       filmData: {},
       dateString: "",
       recommendations: [],
-    }
+    };
   },
 
   created() {
@@ -111,7 +107,6 @@ export default {
   methods: {
     createThis() {
       this.service.createMoviePage(this.$route.params.id).then(response => {
-
         this.filmData = response.data;
         this.dateString = this.filmData.release_date.substring(0, 4);
       }).catch(() => {
@@ -142,7 +137,6 @@ export default {
     */
   },
 
-
   watch: {
     $route() {
       this.createThis();
@@ -152,9 +146,21 @@ export default {
   computed: {
     titleAndYear() {
       return this.filmData.title + "  (" + this.dateString + ")";
+    },
+
+    service() {
+      return this.$store.state.service;
+    },
+
+    apiImagesUrl() {
+      return this.$store.state.service.imagesSourceUrl;
+    },
+
+    apiSmallImagesUrl() {
+      return this.$store.state.service.smallImagesUrl;
     }
   }
-}
+};
 </script>
 
 <style>

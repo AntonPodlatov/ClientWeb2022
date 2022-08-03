@@ -55,10 +55,10 @@ const routes = [
         redirect: "/not-found"
     }
 
-]
+];
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: "history",
     base: process.env.BASE_URL,
     routes
 });

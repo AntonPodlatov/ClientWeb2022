@@ -135,7 +135,7 @@ export default {
   methods: {
     toggle() {
       if (this.snackbar === true) {
-        this.snackbar = true
+        this.snackbar = true;
       } else {
         this.snackbar = !this.snackbar;
       }
@@ -174,7 +174,7 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style scoped lang="sass">

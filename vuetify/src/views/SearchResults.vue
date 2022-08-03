@@ -32,7 +32,6 @@
 import MovieCard from "@/components/MovieCard";
 import {propertyOf} from "underscore";
 
-
 export default {
   name: "SearchingResults",
 
@@ -42,15 +41,11 @@ export default {
 
   data() {
     return {
-      service: this.$store.state.service,
-      apiImagesUrl: String(this.$store.state.service.smallImagesUrl),
       movies: [],
       pagesCount: 0,
-      currentPageNumber: Number(this.$route.params.pageNumber || 1),
-      searchFieldValue: this.$store.state.searchFieldValue
+      currentPageNumber: Number(this.$route.params.pageNumber || 1)
     };
   },
-
 
   created() {
     this.search(this.currentPageNumber);
@@ -61,7 +56,7 @@ export default {
         },
         () => {
           this.searchFieldValue = this.$store.state.searchFieldValue;
-          this.search(1)
+          this.search(1);
         }
     );
   },
@@ -101,6 +96,26 @@ export default {
       this.$router.push({path: "/results/" + this.currentPageNumber});
       this.search(Number(this.$route.params.pageNumber), this.searchFieldValue);
     }
+  },
+
+  computed: {
+    service() {
+      return this.$store.state.service;
+    },
+
+    apiImagesUrl() {
+      return String(this.$store.state.service.smallImagesUrl);
+    },
+
+    searchFieldValue: {
+      get() {
+        return this.$store.state.searchFieldValue;
+      },
+
+      set() {
+        this.$store.commit("setSearchFieldValue", this.searchFieldValue);
+      }
+    }
   }
-}
+};
 </script>

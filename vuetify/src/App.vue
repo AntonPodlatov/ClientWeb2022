@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <v-app-bar v-if="windowWidth >= 750" app dark color="black" hide-on-scroll>
+  <v-app v-resize="onResize">
+    <v-app-bar v-if="windowWidth >= 790" app dark color="black" hide-on-scroll>
       <v-tabs v-model="tab" class="px-sm-3">
         <v-tab @change="goMain" dark class="text">
           Popular movies
@@ -68,7 +68,7 @@
 
 <script>
 export default {
-  name: 'App',
+  name: "App",
 
   data() {
     return {
@@ -76,7 +76,7 @@ export default {
       searchFieldValue: "",
       currentMoviePath: "",
       windowWidth: window.innerWidth
-    }
+    };
   },
 
   created() {
@@ -136,13 +136,15 @@ export default {
       if (!/^\/results\/\d+/.test(this.$route.path)) {
         this.$router.push({path: "/results/1"});
       }
+    },
+
+    onResize() {
+      this.windowWidth = window.innerWidth;
     }
   },
 
   mounted() {
-    window.onresize = () => {
-      this.windowWidth = window.innerWidth
-    }
+    this.onResize();
   },
 
   watch: {
@@ -150,17 +152,9 @@ export default {
       if (this.isMoviePage()) {
         this.tab = 2;
       }
-    },
-
-    windowWidth() {
-      if (this.windowWidth < 750) {
-        this.$store.commit("setIsMobile", true);
-      } else {
-        this.$store.commit("setIsMobile", false);
-      }
     }
   }
-}
+};
 </script>
 
 <style>

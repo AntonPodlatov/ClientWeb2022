@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 import storageService from "@/storageService";
 import service from "@/service";
 
@@ -13,7 +13,6 @@ export default new Vuex.Store({
         lastMoviePath: "",
         lastMovieId: null,
         menuHeaderText: "Popular Movies",
-        isMobile: window.innerWidth < 750,
         storageService: new storageService(),
         service: new service()
     },
@@ -21,10 +20,6 @@ export default new Vuex.Store({
     getters: {},
 
     mutations: {
-        setIsMobile(state, isMobile) {
-            state.isMobile = isMobile;
-        },
-
         setMenuHeaderText(state, text) {
             state.menuHeaderText = text;
         },
@@ -52,4 +47,4 @@ export default new Vuex.Store({
     actions: {},
 
     modules: {}
-})
+});
