@@ -1,7 +1,16 @@
 <template>
   <v-container>
-
-    <v-row class="justify-center mt-1">
+    <v-alert
+        dismissible
+        elevation="2"
+        text
+        type="error"
+        :value="cantLoadData"
+    >
+      can't load data
+    </v-alert>
+    <v-row v-if="!cantLoadData"
+           class="justify-center mt-1">
       <span v-if="movies.length === 0" class="white--text text-h5">Nothing found</span>
       <span v-else class="white--text text-h5">Results for  "{{ searchFieldValue }}":</span>
     </v-row>
@@ -17,6 +26,7 @@
 
     <div class="text-center mt-12">
       <v-pagination
+          v-if="!cantLoadData"
           dark
           color="black"
           :length="pagesCount"
@@ -41,6 +51,7 @@ export default {
 
   data() {
     return {
+      cantLoadData: false,
       movies: [],
       pagesCount: 0,
       currentPageNumber: Number(this.$route.params.pageNumber || 1)
@@ -63,15 +74,23 @@ export default {
 
   methods: {
     search(pageNumber) {
-      this.service.search(pageNumber, this.searchFieldValue).then(res => {
-        this.movies = res.data.results;
+      if (this.searchFieldValue === "") {
+        this.$router.push({path: "/"});
+        return;
+      }
 
+      this.service.search(pageNumber, this.searchFieldValue).then(res => {
+        if (res.status === 200) {
+          this.cantLoadData = false;
+        }
+
+        this.movies = res.data.results;
         this.pagesCount = res.data.total_pages;
         this.currentPageNumber = res.data.page;
 
         this.movies.forEach(movie => movie.genres = this.getMovieGenresNames(movie.genre_ids));
       }).catch(error => {
-        alert("Can`t load data.");
+        this.cantLoadData = true;
         console.log(error);
       });
 

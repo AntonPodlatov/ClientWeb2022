@@ -15,7 +15,7 @@
                   tag="'v-img'"
                   centered
                   :absolute="true"
-                  content-class="d-flex  px-0 justify-center"
+                  content-class="d-flex px-0 justify-center"
       >
         <span v-if="isCheckBoxChecked" class="text-center">
           Added to favourites.
@@ -25,7 +25,7 @@
         </span>
       </v-snackbar>
 
-      <v-img :src="imagePath" aspect-ratio="0.675">
+      <v-img :src="imagePath" aspect-ratio="0.675" transition="scale-transition">
         <template v-slot:placeholder>
           <v-row
               class="fill-height  ma-0"
@@ -45,21 +45,23 @@
                    tile
                    :content="movie.vote_average || 'no data'">
           </v-badge>
+
+          <v-slide-x-transition>
           <v-checkbox class="pt-0 mt-2"
                       @click.stop
                       color="red"
                       v-if="hover || isCheckBoxChecked || $store.state.isMobile"
                       v-model="isCheckBoxChecked"
                       @change="toggle"
-                      off-icon="mdi-heart-outline"
-                      on-icon="mdi-heart-outline">
+                      off-icon="mdi-diamond-outline"
+                      on-icon="mdi-diamond-outline">
           </v-checkbox>
+          </v-slide-x-transition>
         </div>
       </v-img>
-
       <div v-if="!isOnlyPoster">
         <v-card-title class="ps-2 pb-1 pt-2 pe-1 justify-md-space-between">
-          <span class="text-truncate text-body-1 font-weight-medium">{{ movie.title }}</span>
+          <span class="text-truncate text-body-1 font-weight-medium">{{ titleAndYear }}</span>
         </v-card-title>
 
         <v-card-text>
@@ -162,6 +164,10 @@ export default {
   computed: {
     imagePath() {
       return this.apiImagesUrl + this.movie.poster_path;
+    },
+
+    titleAndYear() {
+      return this.movie.title + "  (" + this.movie.release_date.substring(0, 4) + ")";
     }
   },
 

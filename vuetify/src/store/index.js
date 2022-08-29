@@ -39,6 +39,7 @@ export default new Vuex.Store({
         setLastMoviePath(state, path) {
             state.lastMoviePath = path;
         },
+
         setLastMovieId(state, id) {
             state.lastMovieId = id;
         },

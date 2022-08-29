@@ -1,11 +1,18 @@
 <template>
-  <v-parallax height=""
-              class="fill-height"
-              src="https://images.freeimages.com/images/large-previews/06a/cinema-1221624.jpg">
+  <div>
+    <v-alert
+        dismissible
+        elevation="2"
+        text
+        type="error"
+        :value="cantLoadData"
+    >
+      data loading problems
+    </v-alert>
     <v-container>
       <v-row v-if="movies.length === 0">
         <v-col cols="12" class="text-center">
-          <span class="text-h5">There's nothing here..</span>
+          <span class="white--text text-h5">There's nothing here..</span>
         </v-col>
       </v-row>
 
@@ -22,9 +29,7 @@
         </v-col>
       </v-row>
     </v-container>
-
-  </v-parallax>
-
+  </div>
 </template>
 <script>
 import MovieCard from "@/components/MovieCard";
@@ -40,7 +45,8 @@ export default {
     return {
       storageService: this.$store.state.storageService,
       service: this.$store.state.service,
-      movies: []
+      movies: [],
+      cantLoadData: false
     };
   },
 
@@ -51,6 +57,18 @@ export default {
   methods: {
     createThis() {
       this.movies = this.storageService.getFavourites();
+
+      if (this.movies.length === 0) {
+          return;
+      }
+
+      this.service.createMoviePage(this.movies[0].id).then(response => {
+        if (response.status === 200) {
+          this.cantLoadData = false;
+        }
+      }).catch(() => {
+        this.cantLoadData = true;
+      });
     }
   }
 };
